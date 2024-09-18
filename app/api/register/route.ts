@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import bycrpt from "bcrypt";
 import { db } from "@/lib/db";
 import { sendEmail } from "@/lib/mailer";
-import { connect } from "http2";
-
 
 
 export async function POST(request: NextRequest) {
@@ -15,9 +13,8 @@ export async function POST(request: NextRequest) {
     const hashedPassword = await bycrpt.hash(password, 10);
 
     const userUrl = `${process.env.BASE_URL}/login?employeeNumber=${body.employeeNumber}`;
-    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${userUrl}`;
 
-    const result = await db.$transaction(async (prisma) => {
+    await db.$transaction(async (prisma:any) => {
       const studentInfo = body.studentInfo
       const user = await prisma.user.create({
         data: {

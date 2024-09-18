@@ -47,7 +47,6 @@ export default function Register() {
     const [step, setStep] = useState(1);
     const [guardianImage, setGuardianImage] = useState("")
     const [studentImage, setStudentImage] = useState("")
-    const [backDisabled, setBackDisabled] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [formData, setFormData] = useState<FormData>({
@@ -84,6 +83,13 @@ export default function Register() {
     const save = async () => {
         console.log("Save started__________________________2")
         try {
+            setFormData(prevData => ({
+                ...prevData,
+                guardianInfo: {
+                    ...prevData["studentInfo"],
+                    ["image"]: guardianImage
+                }
+            }))
             setFormData(prevData => ({
                 ...prevData,
                 studentInfo: {
@@ -157,9 +163,7 @@ export default function Register() {
         }
     };
 
-    useEffect(() => {
-        setBackDisabled(step === 1);
-    }, [step]);
+   
   return (
     <main className="min-h-screen">
     <div className="black-layer relative">
@@ -177,6 +181,10 @@ export default function Register() {
             <p className='text-lg text-[#DB9E30] font-semibold'>Begin Your Journey!</p>
             <p className='heading text-5xl font-semibold'>Lorem Ipsum</p>
             </div>
+            {
+                error ?
+                (<div className="error"></div>):<></>
+            }
             <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 w-full" >
                     <Image src="/register.png" width={700} height={500} alt='side-image' className='h-auto hidden sm:flex'/>
                     <div className="grid grid-cols-1 gap-2">
@@ -339,7 +347,7 @@ export default function Register() {
                         <ImageUpload onChange={setGuardianImage} />
                         <div className="flex flex-col gap-4 w-full justify-center">
                         <div className="grid items-center gap-1.5">
-                            <Label htmlFor="guardian_first_name" className="font-semibold">Guardian's First Name:</Label>
+                            <Label htmlFor="guardian_first_name" className="font-semibold">Guardian&apos;s First Name:</Label>
                             <Input 
                                 type="text" 
                                 id="guardian_first_name" 
@@ -349,7 +357,7 @@ export default function Register() {
                             />
                         </div>
                         <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="guardian_last_name" className="font-semibold">Guardian's Last Name:</Label>
+                            <Label htmlFor="guardian_last_name" className="font-semibold">Guardian&apos;s Last Name:</Label>
                             <Input 
                                 type="text" 
                                 id="guardian_last_name" 

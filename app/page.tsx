@@ -1,11 +1,11 @@
 'use client'
-import Image from "next/image";
+
 import { GiOpenBook } from "react-icons/gi";
 import { GiTombstone } from "react-icons/gi";
 import { FaMosque } from "react-icons/fa6";
 import { FaHandsHelping } from "react-icons/fa";
+
 import {motion} from 'framer-motion'
-import Navbar from "./components/navbar";
 import { LazyMotion, domAnimation } from "framer-motion"
 
 

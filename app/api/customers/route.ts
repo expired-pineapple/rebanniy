@@ -71,7 +71,7 @@ export async function GET(request: NextRequest,  { params }: { params: { id: str
 //                 // Then, create new locations
 //                 userUpdateData.location = {
 //                     create: userLocation.map((locationId: string) => ({
-//                         // @ts-ignore
+//                         // @ts-expect-error
 //                         locationId: locationId.locationId
 //                     }))
 //                 };

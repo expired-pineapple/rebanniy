@@ -1,18 +1,17 @@
 'use client'
 import { useEffect, useState } from "react";
+import Link from "next/link";
+
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaTelegramPlane } from "react-icons/fa";
 import { ImFacebook } from "react-icons/im";
 import { IoMdPhonePortrait } from "react-icons/io";
 import { PiMapPinLineLight } from "react-icons/pi";
-import Link from "next/link";
-import { IoCloseSharp } from "react-icons/io5";
-import { MdOutlineSmartphone } from "react-icons/md";
-import { IoMailOutline } from "react-icons/io5";
-import { PiMapPinLine } from "react-icons/pi";
 import { CgMenuRight } from "react-icons/cg";
+
 import SideBar from "./side-bar";
+
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

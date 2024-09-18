@@ -28,7 +28,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value}) => {
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       if (acceptedFiles.length > 0) {
-        const newPreviews = acceptedFiles.map((file) => {
+        acceptedFiles.map((file) => {
           const reader = new FileReader();
           reader.onload = () => {
             setPreviews([ reader.result as string]);

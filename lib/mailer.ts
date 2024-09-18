@@ -1,8 +1,8 @@
 import Mail from "nodemailer/lib/mailer";
+import nodemailer from 'nodemailer';
 
-  const nodemailer = require('nodemailer');
-  
   const transporter = nodemailer.createTransport({
+      // @ts-expect-error
     host: 'mail.rebbaniy.com',
     secure: true,
     port: '465',

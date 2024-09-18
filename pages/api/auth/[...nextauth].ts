@@ -52,7 +52,7 @@ export const authOptions: AuthOptions = {
   callbacks: {
     jwt: async ({ token, trigger, user , session}) => {
       if (trigger === "update" && session) {
-        // @ts-ignore
+        // @ts-expect-error
         token.user.username = session.user.username
         return token
       }
