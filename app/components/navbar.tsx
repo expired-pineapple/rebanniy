@@ -48,7 +48,7 @@ const Navbar = () => {
       <div className="flex justify-between w-full">
         <div className="flex items-center">
           <Link href="/" className="absolute top-0 flex transition-all duration-300">
-            <svg className="fill-[#DB9E30] w-48 h-48" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 184.15 191.11">
+            <svg className="fill-[#DB9E30] w-48 h-48 hidden sm:flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 184.15 191.11">
               <g>
                 <path d="M93.08,191.11c-0.33,0-0.67,0-1,0c-5.44-8.58-13.89-13.21-22.85-16.97c-9.31-3.91-17.25-9.39-22.27-18.33
                 c-1.76-3.14-3.91-4.36-7.49-4.54C27.15,150.68,20,144.64,17,132.6c-0.51-2.04-1.41-3.36-3.43-3.73c-5.72-1.05-9.92-4.41-13.5-8.75
@@ -58,16 +58,17 @@ const Navbar = () => {
                 C104.81,178.91,97.44,183.23,93.08,191.11z"></path>
               </g>
             </svg>
-            <img className="absolute top-0 px-10 py-4" src="https://nauthemes.com/demo/muezzin/wp-content/themes/taqwa/assets/images/logo2.png" alt="Muezzin" itemProp="image"></img>
+            <img className="absolute top-0 px-10 py-4 hidden sm:flex" src="https://nauthemes.com/demo/muezzin/wp-content/themes/taqwa/assets/images/logo2.png" alt="Muezzin" itemProp="image"></img>
             {isScrolled && (
-            <span className="py-10 px-4 text-2xl font-semibold heading text-[#DB9E30]">Rebaniy</span>
+            <span className="py-10 px-4 text-2xl font-semibold heading text-[#DB9E30] hidden sm:flex">Rebbaniy</span>
           )}
+          <span className="py-10 px-4 text-2xl font-semibold heading text-[#DB9E30] flex sm:hidden">Rebbaniy</span>
           </Link>
         </div>
 
         <div className={` ${!isScrolled?  "w-[80%]" : ""}`}>
           {!isScrolled && (
-            <div className="flex justify-between py-4 items-center" id="contact-info">
+            <div className=" justify-between py-4 items-center hidden sm:flex" id="contact-info">
               <div className="flex gap-10">
                 <div className="flex gap-2 text-lg text-white items-center">
                   <IoMdPhonePortrait />
@@ -95,24 +96,13 @@ const Navbar = () => {
             </div>
           )}
 
-<div className={`flex justify-between gap-10 py-4 items-center text-lg font-semibold ${isScrolled ? "text-black " : "text-white"}`} id="contact-info">
-{
-                !isScrolled && (
-              <div className="flex gap-10">
-                <Link href="/">Home</Link>
-                <Link href="/">Charity</Link>
-                <Link href="/">Events</Link>
-                <Link href="/">Scholar</Link>
-              </div>
-               )
-              }
-           
-
+<div className={`flex justify-end gap-10 py-4 items-center text-lg font-semibold ${isScrolled ? "text-black " : "text-white"}`} id="contact-info">
+               
                   <div className="flex gap-4 items-center">
                   <div className={`hover:text-[#DB9E30] cursor-pointer ${!isScrolled ? "text-white" :"text-[#DB9E30]"}`}onClick={()=>{setOpenSidebar(!openSidebar)}}>
                     <CgMenuRight className="text-4xl" />
                   </div>
-                  <a href="/register" className="bg-[#DB9E30] px-6 py-2 rounded-full text-md z-10 text-white cursor-pointer">
+                  <a href="/register" className="bg-[#DB9E30] px-6 py-2 rounded-full text-md z-10 text-white cursor-pointer hidden sm:flex">
                     Join Community
                   </a>
                   </div>

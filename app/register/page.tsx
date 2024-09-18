@@ -24,6 +24,7 @@ interface StudentInfo {
     firstName: string;
     lastName: string;
     username: string;
+    email: string;
     password: string;
     age: number;
     gender: string;
@@ -56,6 +57,7 @@ export default function Register() {
             lastName: "",
             username: "",
             password: "",
+            email:"",
             gender: "",
             studentStatus: "",
             confirmPassword: "",
@@ -170,24 +172,24 @@ export default function Register() {
                 </div>
             </div>
         </div>
-        <div className="flex flex-col items-center justify-center gap-4 py-10 px-20">
-            <div className="flex flex-col items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-4 py-10 sm:px-20 px-10">
+            <div className="flex flex-col items-center justify-center gap-4 text-center">
             <p className='text-lg text-[#DB9E30] font-semibold'>Begin Your Journey!</p>
             <p className='heading text-5xl font-semibold'>Lorem Ipsum</p>
             </div>
-            <div className="grid grid-cols-2 gap-4 w-full" >
-                    <Image src="/register.png" width={700} height={500} alt='side-image' className='h-auto'/>
+            <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 w-full" >
+                    <Image src="/register.png" width={700} height={500} alt='side-image' className='h-auto hidden sm:flex'/>
                     <div className="grid grid-cols-1 gap-2">
                         <div className="flex justify-between items-center gap-2">
-                            <div className={`rounded-full w-12 h-12 p-10 flex justify-center items-center text-xl text-white heading cursor-pointer hover:bg-[#08513F] ${step ==1 ? "bg-[#08513F]" :"bg-gray-400"}`} onClick={()=>{setStep(1)}}>
+                            <div className={`rounded-full sm:w-12 w-6 sm:h-12 h-6 sm:p-10 p-5 flex justify-center items-center text-xl text-white heading cursor-pointer hover:bg-[#08513F] ${step ==1 ? "bg-[#08513F]" :"bg-gray-400"}`} onClick={()=>{setStep(1)}}>
                                 1
                             </div>
                             <div className='border border-gray-300 h-0 w-full'></div>
-                            <div className={`rounded-full w-12 h-12 p-10 flex justify-center items-center text-xl cursor-pointer hover:bg-[#08513F] ${step ==2 ? "bg-[#08513F]" :"bg-gray-400"} text-white heading`} onClick={()=>{setStep(2)}}>
+                            <div className={`rounded-full sm:w-12 w-6 sm:h-12 h-6 sm:p-10 p-5 flex justify-center items-center text-xl cursor-pointer hover:bg-[#08513F] ${step ==2 ? "bg-[#08513F]" :"bg-gray-400"} text-white heading`} onClick={()=>{setStep(2)}}>
                                 2
                             </div>
                             <div className='border border-gray-300 h-0 w-full'></div>
-                            <div className={`rounded-full w-12 h-12 p-10 flex justify-center items-center text-xl ${step ==3 ? "bg-[#08513F]" :"bg-gray-400"} text-white heading`}>
+                            <div className={`rounded-full sm:w-12 w-6 sm:h-12 h-6 sm:p-10 p-5 flex justify-center items-center text-xl ${step ==3 ? "bg-[#08513F]" :"bg-gray-400"} text-white heading`}>
                                 3
                             </div>
                         </div>
@@ -198,7 +200,7 @@ export default function Register() {
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ stiffness: 5 }}
                         exit={{ x: -300, opacity: 0 }}
-                        className="grid grid-cols-2 gap-2"
+                        className="grid sm:grid-cols-2 grid-cols-1 gap-2"
                     >
                         <ImageUpload onChange={setStudentImage} />
                         <div className="flex flex-col gap-4 w-full justify-center">
@@ -223,6 +225,26 @@ export default function Register() {
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'lastName', e.target.value)}
                                     />
                                 </div>
+                            </div>
+                            <div className="grid w-full items-center gap-1.5">
+                                    <Label htmlFor="email" className="font-semibold">Email:</Label>
+                                    <Input 
+                                        type="email" 
+                                        id="email" 
+                                        placeholder="john.doe@rebbaniy.com" 
+                                        value={formData.studentInfo.email}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'email', e.target.value)}
+                                    />
+                                </div>
+                            <div className="grid w-full items-center gap-1.5">
+                                <Label htmlFor="username" className="font-semibold">Username:</Label>
+                                <Input 
+                                    type="text" 
+                                    id="username" 
+                                    placeholder="john.doe" 
+                                    value={formData.studentInfo.username}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'username', e.target.value)}
+                                />
                             </div>
                             <div className="grid w-full items-center gap-1.5">
                                     <Label htmlFor="age" className="font-semibold">Age:</Label>
@@ -260,16 +282,6 @@ export default function Register() {
                                         </Select>
                             </div>
 
-                            <div className="grid w-full items-center gap-1.5">
-                                <Label htmlFor="username" className="font-semibold">Username:</Label>
-                                <Input 
-                                    type="text" 
-                                    id="username" 
-                                    placeholder="john.doe" 
-                                    value={formData.studentInfo.username}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'username', e.target.value)}
-                                />
-                            </div>
                             <div className="grid w-full items-center gap-1.5">
                                 <Label htmlFor="password" className="font-semibold">Password:</Label>
 
@@ -322,7 +334,7 @@ export default function Register() {
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: -300, opacity: 0 }}
                         transition={{ stiffness: 5 }}
-                        className="grid grid-cols-2 gap-2"
+                        className="grid sm:grid-cols-2 grid-cols-1 gap-2"
                     >
                         <ImageUpload onChange={setGuardianImage} />
                         <div className="flex flex-col gap-4 w-full justify-center">

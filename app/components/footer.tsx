@@ -16,13 +16,13 @@ return(
         </div>
         <a href="/register" className="px-6 py-3 bg-[#DB9E30] text-white rounded-full font-semibold hover:bg-opacity-90 transition duration-300">Join Community</a>
       </div>
-      <div className="flex justify-between py-10">
+      <div className="flex flex-col justify-between py-10 sm:flex-row">
 
-        <div>
+        <div className="py-4">
           <h4 className="text-xl font-semibold mb-4 heading">Information</h4>
-          <p className="text-lg w-1/2">Elit duis volutpat ligula nulla a getmolestie mi consectetur auctor ugue ac tincidunt, var ius felis et, augue lorem. Aliquam accumsan fringilla.</p>
+          <p className="text-lg sm:w-1/2">Elit duis volutpat ligula nulla a getmolestie mi consectetur auctor ugue ac tincidunt, var ius felis et, augue lorem. Aliquam accumsan fringilla.</p>
         </div>
-        <div className="flex gap-6 w-[60%]">
+        <div className="flex sm:flex-row flex-col gap-6 w-[60%]">
         <div className="w-full">
           <h4 className="text-xl font-semibold mb-4 heading">Contact Info</h4>
           <ul className="space-y-4">
