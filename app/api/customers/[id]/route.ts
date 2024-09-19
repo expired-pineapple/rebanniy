@@ -15,10 +15,6 @@ export async function GET(request: NextRequest,  { params }: { params: { id: str
         const student = await db.student.findUnique({
             where: {
                 id: id
-            },
-            include: {
-                guardian: true,
-                user: true
             }
         });
 
