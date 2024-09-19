@@ -24,6 +24,7 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
+    CardContent
   } from "@/components/ui/card";
 
 
@@ -199,17 +200,9 @@ export default function Register() {
             <CardHeader>
                   <CardTitle>Register Student</CardTitle>
                   <CardDescription>Fill in the form to register users</CardDescription>
-
-            </CardHeader>
-            </Card>
-            <div className="flex flex-col items-center justify-center gap-4 text-center">
-            <p className='text-lg text-[#DB9E30] font-semibold'>Begin Your Journey!</p>
-            <p className='heading text-5xl font-semibold'>Lorem Ipsum</p>
-            </div>
-            <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 w-full" >
-                    <Image src="/register.png" width={700} height={500} alt='side-image' className='h-auto hidden sm:flex'/>
-                    <div className="grid grid-cols-1 gap-2">
-                        <div className="flex justify-between items-center gap-2 my-6">
+                  <CardContent>
+                  <div className="grid grid-cols-1 gap-2">
+                  <div className="flex justify-between items-center gap-2 my-6">
                             <div className={`rounded-full sm:w-12 w-6 sm:h-12 h-6 sm:p-10 p-5 flex justify-center items-center text-xl text-white heading cursor-pointer hover:bg-[#08513F] ${step ==1 ? "bg-[#08513F]" :"bg-gray-400"}`} onClick={()=>{setStep(1)}}>
                                 1
                             </div>
@@ -222,295 +215,299 @@ export default function Register() {
                                 3
                             </div>
                         </div>
-                        {
-                error ?
-                (<div className="error text-red-700 h-fit px-4 py-2 border border-red-300 bg-red-500/[20%] rounded-lg w-full text-center">{error}</div>):<></>
-            }
-                        {step === 1 && (
-                <AnimatePresence>
-                    <motion.div
-                        initial={{ x: 300, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ stiffness: 5 }}
-                        exit={{ x: -300, opacity: 0 }}
-                        className="grid sm:grid-cols-2 grid-cols-1 gap-2"
-                    >
-                        <ImageUpload onChange={setStudentImage} />
-                        <div className="flex flex-col gap-4 w-full justify-center">
-                            <div className="flex gap-2">
-                                <div className="grid w-full items-center gap-1.5">
-                                    <Label htmlFor="first_name" className="font-semibold">First Name:</Label>
-                                    <Input 
-                                        type="text" 
-                                        id="first_name" 
-                                        placeholder="John" 
-                                        value={formData.studentInfo.firstName}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'firstName', e.target.value)}
-                                        required
-                                        onBlur={(e) => {
-                                            if (!e.target.value) {
-                                              setErrors((prev) => ({ ...prev, firstName: "Field is required" }));
-                                            } else {
-                                              setErrors((prev) => ({ ...prev, firstName: "" }));
-                                            }
-                                          }}
-                                    />
-                                     {errors?.firstName && (
-                                        <p className="text-red-500 font-semibold">{errors?.firstName}</p>
-                                    )}
-                                </div>
-                                <div className="grid w-full items-center gap-1.5">
-                                    <Label htmlFor="last_name" className="font-semibold">Last Name:</Label>
-                                    <Input 
-                                        type="text" 
-                                        id="last_name" 
-                                        placeholder="Doe" 
-                                        value={formData.studentInfo.lastName}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'lastName', e.target.value)}
-                                        onBlur={(e) => {
-                                            if (!e.target.value) {
-                                              setErrors((prev) => ({ ...prev, lastName: "Field is required" }));
-                                            } else {
-                                              setErrors((prev) => ({ ...prev, lastName: "" }));
-                                            }
-                                          }}
-                                    />
-                                     {errors?.lastName && (
-                                        <p className="text-red-500 font-semibold">{errors?.lastName}</p>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="grid w-full items-center gap-1.5">
-                                    <Label htmlFor="email" className="font-semibold">Email:</Label>
-                                    <Input 
-                                        type="email" 
-                                        id="email" 
-                                        placeholder="john.doe@rebbaniy.com" 
-                                        value={formData.studentInfo.email}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'email', e.target.value)}
-                                        onBlur={(e) => {
-                                            if (!e.target.value) {
-                                              setErrors((prev) => ({ ...prev, email: "Field is required" }));
-                                            } else {
-                                              setErrors((prev) => ({ ...prev, email: "" }));
-                                            }
-                                          }}
-                                    />
-                                     {errors?.email && (
-                                        <p className="text-red-500 font-semibold">{errors?.email}</p>
-                                    )}
-                                </div>
-                            <div className="grid w-full items-center gap-1.5">
-                                <Label htmlFor="username" className="font-semibold">Username:</Label>
-                                <Input 
-                                    type="text" 
-                                    id="username" 
-                                    placeholder="john.doe" 
-                                    value={formData.studentInfo.username}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'username', e.target.value)}
-                                    onBlur={(e) => {
-                                        if (!e.target.value) {
-                                          setErrors((prev) => ({ ...prev, email: "Field is required" }));
-                                        } else {
-                                          setErrors((prev) => ({ ...prev, email: "" }));
-                                        }
-                                      }}
-                                />
-                                 {errors?.email && (
-                                    <p className="text-red-500 font-semibold">{errors?.email}</p>
-                                )}
-                            </div>
-                            <div className="grid w-full items-center gap-1.5">
-                                    <Label htmlFor="age" className="font-semibold">Age:</Label>
-                                    <Input 
-                                        type="number" 
-                                        id="age" 
-                                        placeholder="20" 
-                                        value={formData.studentInfo.age}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'age', e.target.value)}
-                                        onBlur={(e) => {
-                                            if (!e.target.value) {
-                                              setErrors((prev) => ({ ...prev, age: "Field is required" }));
-                                            } else {
-                                              setErrors((prev) => ({ ...prev, age: "" }));
-                                            }
-                                          }}
-                                    />
-                                     {errors?.age && (
-                                        <p className="text-red-500 font-semibold">{errors?.age}</p>
-                                    )}
-                                </div>
-                            <div className="grid w-full items-center gap-1.5">
-                                <Label htmlFor="gender" className="font-semibold">Gender:</Label>
-                                <Select value={formData.studentInfo.gender} onValueChange={(e) => handleChange('studentInfo', 'gender', e)}>
-                                <SelectTrigger className="w-full">
-                                        <SelectValue placeholder="Male" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="MALE">Male</SelectItem>
-                                        <SelectItem value="FEMALE">Female</SelectItem>
-                                    </SelectContent>
-                                    </Select>
-                            </div>
-                            <div className="grid w-full items-center gap-1.5">
-                                <Label htmlFor="preference" className="font-semibold">Preference:</Label>
-                                    <Select  value={formData.studentInfo.studentStatus} onValueChange={(e) => handleChange('studentInfo', 'studentStatus', e)} >
-                                        <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Women" />
-                                        </SelectTrigger>
-                                        <SelectContent className='w-full'>
-                                            <SelectItem value="WOMEN">Women</SelectItem>
-                                            <SelectItem value="CHILDREN">Children</SelectItem>
-                                            
-                                        </SelectContent>
-                                        </Select>
-                            </div>
-
-                            <div className="grid w-full items-center gap-1.5">
-                                <Label htmlFor="password" className="font-semibold">Password:</Label>
-
-                                <div className="relative">
-                                <input
-                                        type={showPassword ? 'text' : 'password'}
-                                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                                        placeholder="********"
-                                        value={formData.studentInfo.password}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'password', e.target.value)}
-                                        
-                                    />
-                                          <button
-                                            type="button"
-                                            className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                                            onClick={() => setShowPassword(!showPassword)}
-                                        >
-                                            {showPassword ? <GoEye /> : <GoEyeClosed />}
-                                        </button>
-                                        </div>
-                            </div>
-                            <div className="grid w-full items-center gap-1.5">
-                                <Label htmlFor="confirm-password" className="font-semibold">Confirm Password:</Label>
-                                <div className="relative">
-                                <input
-                                        type={showConfirmPassword ? 'text' : 'password'}
-                                        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                                        placeholder="********"
-                                        value={formData.studentInfo.confirmPassword}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'confirmPassword', e.target.value)}
-                                        onBlur={(e) => {
-                                            if (!e.target.value) {
-                                              setErrors((prev) => ({ ...prev, confirmPassword: "Field is required" }));
-                                            } else {
-                                              setErrors((prev) => ({ ...prev, confirmPassword: "" }));
-                                            }
-                                          }}
-                                    />
-                                          <button
-                                            type="button"
-                                            className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                        >
-                                            {showConfirmPassword ? <GoEye /> : <GoEyeClosed />}
-                                        </button>
-                                        </div>
-                                        {errors?.confirmPassword && (
-                                        <p className="text-red-500 font-semibold">{errors?.confirmPassword}</p>
-                                    )}
-                            </div>
-                        </div>
-                    </motion.div>
-                </AnimatePresence>
+{
+error ?
+(<div className="error text-red-700 h-fit px-4 py-2 border border-red-300 bg-red-500/[20%] rounded-lg w-full text-center">{error}</div>):<></>
+}
+{step === 1 && (
+<AnimatePresence>
+<motion.div
+initial={{ x: 300, opacity: 0 }}
+animate={{ x: 0, opacity: 1 }}
+transition={{ stiffness: 5 }}
+exit={{ x: -300, opacity: 0 }}
+className="grid sm:grid-cols-2 grid-cols-1 gap-2"
+>
+<ImageUpload onChange={setStudentImage} />
+<div className="flex flex-col gap-4 w-full justify-center">
+    <div className="flex gap-2">
+        <div className="grid w-full items-center gap-1.5">
+            <Label htmlFor="first_name" className="font-semibold">First Name:</Label>
+            <Input 
+                type="text" 
+                id="first_name" 
+                placeholder="John" 
+                value={formData.studentInfo.firstName}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'firstName', e.target.value)}
+                required
+                onBlur={(e) => {
+                    if (!e.target.value) {
+                      setErrors((prev) => ({ ...prev, firstName: "Field is required" }));
+                    } else {
+                      setErrors((prev) => ({ ...prev, firstName: "" }));
+                    }
+                  }}
+            />
+             {errors?.firstName && (
+                <p className="text-red-500 font-semibold">{errors?.firstName}</p>
             )}
-            {step === 2 && (
-                <AnimatePresence>
-                    <motion.div
-                        initial={{ x: 300, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: -300, opacity: 0 }}
-                        transition={{ stiffness: 5 }}
-                        className="grid sm:grid-cols-2 grid-cols-1 gap-2"
-                    >
-                        <ImageUpload onChange={setGuardianImage} />
-                        <div className="flex flex-col gap-4 w-full justify-center">
-                        <div className="grid items-center gap-1.5">
-                            <Label htmlFor="guardian_first_name" className="font-semibold">Guardian&apos;s First Name:</Label>
-                            <Input 
-                                type="text" 
-                                id="guardian_first_name" 
-                                placeholder="John" 
-                                value={formData.guardianInfo.firstName}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('guardianInfo', 'firstName', e.target.value)}
-                            />
-                        </div>
-                        <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="guardian_last_name" className="font-semibold">Guardian&apos;s Last Name:</Label>
-                            <Input 
-                                type="text" 
-                                id="guardian_last_name" 
-                                placeholder="Doe" 
-                                value={formData.guardianInfo.lastName}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('guardianInfo', 'lastName', e.target.value)}
-                            />
-                        </div>
-                        </div>
-                    </motion.div>
-                </AnimatePresence>
+        </div>
+        <div className="grid w-full items-center gap-1.5">
+            <Label htmlFor="last_name" className="font-semibold">Last Name:</Label>
+            <Input 
+                type="text" 
+                id="last_name" 
+                placeholder="Doe" 
+                value={formData.studentInfo.lastName}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'lastName', e.target.value)}
+                onBlur={(e) => {
+                    if (!e.target.value) {
+                      setErrors((prev) => ({ ...prev, lastName: "Field is required" }));
+                    } else {
+                      setErrors((prev) => ({ ...prev, lastName: "" }));
+                    }
+                  }}
+            />
+             {errors?.lastName && (
+                <p className="text-red-500 font-semibold">{errors?.lastName}</p>
             )}
-                            {
-                                step == 3 && (
-                                    <AnimatePresence>
-                                    <motion.div
-                                    initial={{ x: 300, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    exit={{ x: -300, opacity: 0 }}
-                                    transition={{stiffness: 5}}
-                                    className="flex flex-col gap-4 w-full items-center justify-center"
-                                    >
-                                        <IoMailOutline className='text-7xl text-[#08513F]'/>
-                                        <div className="text-center w-1/2 flex flex-col justify-center items-center">
-                                        <h1 className="heading text-5xl text-[#08513F]">Thank you for registering!</h1>
-                                            <div className="flex gap-4 items-center">
-                                              <h1 className="heading text-xl text-[#DB9E30]">Please check your inbox for a confirmation email</h1>
-                                        </div>
-                                        </div>
-                                </motion.div>
-                                </AnimatePresence>
-                                )
-                            }
-                    <div className="flex items-end gap-3 ml-auto">
-
-                    <div className="flex items-end gap-3 ml-auto">
-                <Button 
-                    variant="outline" 
-                    disabled={step === 1} 
-                    className='w-full' 
-                    onClick={() => setStep(prev => prev - 1)}
-                >
-                    Back
-                </Button>
-                <Button 
-                    disabled={step === 3} 
-                    onClick={handleNext}
-                >
-                     {loading ? (
-                  <div className="flex items-center justify-center">
-                    <PiSpinner className="h-4 w-4 mr-2 animate-spin text-white" />
-                  <p>
-                    Loading
-                  </p>
-                  </div>
-                ) : (
-                    <>
-                     {step < 2 ? "Next" : "Save"}
-                    </>
-                   
-                )}
+        </div>
+    </div>
+    <div className="grid w-full items-center gap-1.5">
+            <Label htmlFor="email" className="font-semibold">Email:</Label>
+            <Input 
+                type="email" 
+                id="email" 
+                placeholder="john.doe@rebbaniy.com" 
+                value={formData.studentInfo.email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'email', e.target.value)}
+                onBlur={(e) => {
+                    if (!e.target.value) {
+                      setErrors((prev) => ({ ...prev, email: "Field is required" }));
+                    } else {
+                      setErrors((prev) => ({ ...prev, email: "" }));
+                    }
+                  }}
+            />
+             {errors?.email && (
+                <p className="text-red-500 font-semibold">{errors?.email}</p>
+            )}
+        </div>
+    <div className="grid w-full items-center gap-1.5">
+        <Label htmlFor="username" className="font-semibold">Username:</Label>
+        <Input 
+            type="text" 
+            id="username" 
+            placeholder="john.doe" 
+            value={formData.studentInfo.username}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'username', e.target.value)}
+            onBlur={(e) => {
+                if (!e.target.value) {
+                  setErrors((prev) => ({ ...prev, email: "Field is required" }));
+                } else {
+                  setErrors((prev) => ({ ...prev, email: "" }));
+                }
+              }}
+        />
+         {errors?.email && (
+            <p className="text-red-500 font-semibold">{errors?.email}</p>
+        )}
+    </div>
+    <div className="grid w-full items-center gap-1.5">
+            <Label htmlFor="age" className="font-semibold">Age:</Label>
+            <Input 
+                type="number" 
+                id="age" 
+                placeholder="20" 
+                value={formData.studentInfo.age}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'age', e.target.value)}
+                onBlur={(e) => {
+                    if (!e.target.value) {
+                      setErrors((prev) => ({ ...prev, age: "Field is required" }));
+                    } else {
+                      setErrors((prev) => ({ ...prev, age: "" }));
+                    }
+                  }}
+            />
+             {errors?.age && (
+                <p className="text-red-500 font-semibold">{errors?.age}</p>
+            )}
+        </div>
+    <div className="grid w-full items-center gap-1.5">
+        <Label htmlFor="gender" className="font-semibold">Gender:</Label>
+        <Select value={formData.studentInfo.gender} onValueChange={(e) => handleChange('studentInfo', 'gender', e)}>
+        <SelectTrigger className="w-full">
+                <SelectValue placeholder="Male" />
+            </SelectTrigger>
+            <SelectContent>
+                <SelectItem value="MALE">Male</SelectItem>
+                <SelectItem value="FEMALE">Female</SelectItem>
+            </SelectContent>
+            </Select>
+    </div>
+    <div className="grid w-full items-center gap-1.5">
+        <Label htmlFor="preference" className="font-semibold">Preference:</Label>
+            <Select  value={formData.studentInfo.studentStatus} onValueChange={(e) => handleChange('studentInfo', 'studentStatus', e)} >
+                <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Women" />
+                </SelectTrigger>
+                <SelectContent className='w-full'>
+                    <SelectItem value="WOMEN">Women</SelectItem>
+                    <SelectItem value="CHILDREN">Children</SelectItem>
                     
-                </Button>
-            </div>
-                    </div>
-                     
+                </SelectContent>
+                </Select>
+    </div>
+
+    <div className="grid w-full items-center gap-1.5">
+        <Label htmlFor="password" className="font-semibold">Password:</Label>
+
+        <div className="relative">
+        <input
+                type={showPassword ? 'text' : 'password'}
+                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="********"
+                value={formData.studentInfo.password}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'password', e.target.value)}
+                
+            />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                    onClick={() => setShowPassword(!showPassword)}
+                >
+                    {showPassword ? <GoEye /> : <GoEyeClosed />}
+                </button>
+                </div>
+    </div>
+    <div className="grid w-full items-center gap-1.5">
+        <Label htmlFor="confirm-password" className="font-semibold">Confirm Password:</Label>
+        <div className="relative">
+        <input
+                type={showConfirmPassword ? 'text' : 'password'}
+                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="********"
+                value={formData.studentInfo.confirmPassword}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'confirmPassword', e.target.value)}
+                onBlur={(e) => {
+                    if (!e.target.value) {
+                      setErrors((prev) => ({ ...prev, confirmPassword: "Field is required" }));
+                    } else {
+                      setErrors((prev) => ({ ...prev, confirmPassword: "" }));
+                    }
+                  }}
+            />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                    {showConfirmPassword ? <GoEye /> : <GoEyeClosed />}
+                </button>
+                </div>
+                {errors?.confirmPassword && (
+                <p className="text-red-500 font-semibold">{errors?.confirmPassword}</p>
+            )}
+    </div>
+</div>
+</motion.div>
+</AnimatePresence>
+)}
+{step === 2 && (
+<AnimatePresence>
+<motion.div
+initial={{ x: 300, opacity: 0 }}
+animate={{ x: 0, opacity: 1 }}
+exit={{ x: -300, opacity: 0 }}
+transition={{ stiffness: 5 }}
+className="grid sm:grid-cols-2 grid-cols-1 gap-2"
+>
+<ImageUpload onChange={setGuardianImage} />
+<div className="flex flex-col gap-4 w-full justify-center">
+<div className="grid items-center gap-1.5">
+    <Label htmlFor="guardian_first_name" className="font-semibold">Guardian&apos;s First Name:</Label>
+    <Input 
+        type="text" 
+        id="guardian_first_name" 
+        placeholder="John" 
+        value={formData.guardianInfo.firstName}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('guardianInfo', 'firstName', e.target.value)}
+    />
+</div>
+<div className="grid w-full items-center gap-1.5">
+    <Label htmlFor="guardian_last_name" className="font-semibold">Guardian&apos;s Last Name:</Label>
+    <Input 
+        type="text" 
+        id="guardian_last_name" 
+        placeholder="Doe" 
+        value={formData.guardianInfo.lastName}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('guardianInfo', 'lastName', e.target.value)}
+    />
+</div>
+</div>
+</motion.div>
+</AnimatePresence>
+)}
+    {
+        step == 3 && (
+            <AnimatePresence>
+            <motion.div
+            initial={{ x: 300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -300, opacity: 0 }}
+            transition={{stiffness: 5}}
+            className="flex flex-col gap-4 w-full items-center justify-center"
+            >
+                <IoMailOutline className='text-7xl text-[#08513F]'/>
+                <div className="text-center w-1/2 flex flex-col justify-center items-center">
+                <h1 className="heading text-5xl text-[#08513F]">Thank you for registering!</h1>
+                    <div className="flex gap-4 items-center">
+                      <h1 className="heading text-xl text-[#DB9E30]">Please check your inbox for a confirmation email</h1>
                 </div>
                 </div>
+        </motion.div>
+        </AnimatePresence>
+        )
+    }
+<div className="flex items-end gap-3 ml-auto">
+
+<div className="flex items-end gap-3 ml-auto">
+<Button 
+variant="outline" 
+disabled={step === 1} 
+className='w-full' 
+onClick={() => setStep(prev => prev - 1)}
+>
+Back
+</Button>
+<Button 
+disabled={step === 3} 
+onClick={handleNext}
+>
+{loading ? (
+<div className="flex items-center justify-center">
+<PiSpinner className="h-4 w-4 mr-2 animate-spin text-white" />
+<p>
+Loading
+</p>
+</div>
+) : (
+<>
+{step < 2 ? "Next" : "Save"}
+</>
+
+)}
+
+</Button>
+</div>
+</div>
+
+</div>
+                  </CardContent>
+
+            </CardHeader>
+            </Card>
+
         
 </main>
   )

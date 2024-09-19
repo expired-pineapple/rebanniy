@@ -17,8 +17,8 @@ export async function GET(request: NextRequest,  { params }: { params: { id: str
                 id: id
             },
             include: {
-                guardian: true,
-                user: true
+                Guardian: true,
+                User: true
             }
         });
 

@@ -27,6 +27,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,16 +38,16 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import { MoreHorizontal } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 
-export default function Dashboard() {
+export default function StudentDetail() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([])
   const [dialog, setDialog] = useState(false)
   const [error, setError] = useState(null)
   const router = useRouter()
-
+  const params = useParams()
 
 
   const fetchStudentData = async () => {
@@ -222,26 +224,10 @@ export default function Dashboard() {
     <div className="flex h-screen w-full flex-col  mx-auto">
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-          <div className="flex items-center">
-            <div className="ml-auto flex items-center gap-2">
-              <Button
-                variant="outline"
-                onClick={()=>{router.push("/admin/register")}}
-              >
-                          <div className="flex items-center justify-center">
-                          <FiUserPlus className="mr-2 h-4 w-4" />
-                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      Register Student
-                    </span>
-                    </div>
-
-              </Button>
-            </div>
-          </div>
           <Card className="sm:col-span-1 col-span-2 w-screen sm:w-full">
             <CardHeader>
-                  <CardTitle>Registered Students</CardTitle>
-                  <CardDescription>List of registered students</CardDescription>
+                  <CardTitle>Details for Student</CardTitle>
+                  <CardDescription></CardDescription>
 
             </CardHeader>
             
