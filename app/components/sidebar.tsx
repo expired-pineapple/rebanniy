@@ -22,7 +22,7 @@ interface SidebarProps {
 
 const SideBar: React.FC<SidebarProps> = ({admin }) => {
   const r  = usePathname();
-  const isAttendance = r === "/"
+  const isStudent = r === "/admin"
   const isEmployee = r === "/employee"
   const isLocation = r === '/configs/location'
   const isPayrollPeriods = r === '/payrollPeriods'
@@ -47,106 +47,26 @@ const SideBar: React.FC<SidebarProps> = ({admin }) => {
               <Link
                 href="/"
                 className={`flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground md:h-8 md:w-8 transition-colors
-                  ${isAttendance ? "bg-accent text-black" : ""}`
+                  ${isStudent ? "bg-accent text-black" : ""}`
                 }
               >
-                <LuFileSignature className={`h-5 w-5  ${isAttendance ? "text-black " : ""}`} />
-                <span className="sr-only">Attendance</span>
+                <Users2 className={`h-5 w-5  ${isStudent ? "text-black " : ""}`} />
+                <span className="sr-only">Students</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Attendance</TooltipContent>
-          </Tooltip>
-          </TooltipProvider>
-          <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="/employee"
-                className={`flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground md:h-8 md:w-8 transition-colors
-                  ${isEmployee ? "bg-accent text-black " : ""}`
-                }
-              >
-                <Users2 className={`h-5 w-5  ${isEmployee ? "text-black " : ""}`} />
-                <span className="sr-only">Employees</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Employees</TooltipContent>
-          </Tooltip>
-          </TooltipProvider>
-          <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="/configs/location"
-                className={`flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground md:h-8 md:w-8 transition-colors
-                  ${isLocation ? "bg-accent text-black " : ""}`
-                }
-              >
-                <FiMapPin className={`h-5 w-5  ${isLocation ? "text-black " : ""}`} />
-                <span className="sr-only">Location</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Location</TooltipContent>
-          </Tooltip>
-          </TooltipProvider>
-        
-          <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="/payrollPeriods"
-                className={`flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground md:h-8 md:w-8 transition-colors
-                  ${isPayrollPeriods ? "bg-accent text-black " : ""}`
-                }
-              >
-                <BsClockHistory className={`h-5 w-5  ${isPayrollPeriods ? "text-black " : ""}`} />
-                <span className="sr-only">Payroll Period</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Payroll Period</TooltipContent>
+            <TooltipContent side="right">Students</TooltipContent>
           </Tooltip>
           </TooltipProvider>
 
-          <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="/ s"
-                className={`flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground md:h-8 md:w-8 transition-colors
-                  ${is  ? "bg-accent text-black " : ""}`
-                }
-              >
-                <RiAccountPinCircleLine className={`h-5 w-5  ${is  ? "text-black " : ""}`} />
-                <span className="sr-only"> s</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right"> s</TooltipContent>
-          </Tooltip>
-          </TooltipProvider>
         </nav>
-        {/* <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4">
-       <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <Settings className="h-5 w-5" />
-                <span className="sr-only">Settings</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Settings</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        </nav> */}
+
       </aside>
       <div className="flex flex-col lg:gap-4 lg:py-4 lg:pl-14">
         <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 lg:static lg:h-auto lg:border-0 lg:bg-transparent lg:px-6">
           <Sheet>
             <SheetTrigger asChild>
               <Button size="icon" variant="outline" className="lg:hidden">
-                <MdWaves className="h-5 w-5" />
+                <Users2 className="h-5 w-5" />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
@@ -157,47 +77,18 @@ const SideBar: React.FC<SidebarProps> = ({admin }) => {
                   href="#"
                   className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground lg:text-base"
                 >
-                  <MdWaves className="h-5 w-5 transition-all group-hover:scale-110" />
-                  <span className="sr-only">MQ</span>
+                  <Users2 className="h-5 w-5 transition-all group-hover:scale-110" />
+                  <span className="sr-only">Rebbani</span>
                 </Link>
                 </div>
                 <Link
-                  href="/"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                   <LuFileSignature className="h-5 w-5" />
-                   <span>Attendance</span>
-                </Link>
-                <Link
-                  href="employee"
+                  href="/admin"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
                    <Users2 className="h-5 w-5" />
-                   <span>Employees</span>
+                   <span>Students</span>
                 </Link>
-                <Link
-                  href="/configs/location"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                   <FiMapPin className="h-5 w-5" />
-                   <span>Location</span>
-                </Link>
-                <Link
-                  href="/payrollPeriods"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                   <BsClockHistory className="h-5 w-5" />
-                   <span>Payroll Period</span>
-                </Link>
-               
-                <Link
-                  href="/ s"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                   <RiAccountPinCircleLine className="h-5 w-5" />
-                   <span> s</span>
-                </Link>
-               
+
               </nav>
             </SheetContent>
           </Sheet>

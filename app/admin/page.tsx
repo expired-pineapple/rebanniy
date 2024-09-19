@@ -9,12 +9,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { FiUserPlus } from "react-icons/fi";
 
 import { DataTable } from "@/components/ui/data-table";
 import { RxCaretSort } from "react-icons/rx";
 import { ColumnDef } from "@tanstack/react-table";
 import axios from "axios";
-import { PiSpinner } from "react-icons/pi";
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -32,15 +32,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import { FiMapPin } from "react-icons/fi";
-
-import { GoLog } from "react-icons/go";
 import { MoreHorizontal } from "lucide-react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 export default function Dashboard() {
@@ -48,6 +44,7 @@ export default function Dashboard() {
   const [data, setData] = useState([])
   const [dialog, setDialog] = useState(false)
   const [error, setError] = useState(null)
+  const router = useRouter()
 
 
 
@@ -229,11 +226,12 @@ export default function Dashboard() {
             <div className="ml-auto flex items-center gap-2">
               <Button
                 variant="outline"
+                onClick={()=>{router.push("/admin/register")}}
               >
                           <div className="flex items-center justify-center">
-                          <LuFileSpreadsheet className="mr-2 h-4 w-4" />
+                          <FiUserPlus className="mr-2 h-4 w-4" />
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      Export
+                      Register Student
                     </span>
                     </div>
 

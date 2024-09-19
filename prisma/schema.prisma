@@ -14,7 +14,7 @@ model ConfirmationToken {
   expirationDate DateTime
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-  User           User     @relation(fields: [userId], references: [id])
+  User           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Guardian {
@@ -25,7 +25,7 @@ model Guardian {
   studentId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Student   Student  @relation(fields: [studentId], references: [id])
+  Student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
 }
 
 model Student {
@@ -35,11 +35,12 @@ model Student {
   age            String
   gender         Gender
   studentStatus  StudentStatus
+  paymentStatus  PaymentStatus?
   paymentReceipt String?
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   Guardian       Guardian[]
-  User           User          @relation(fields: [userId], references: [id])
+  User           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {

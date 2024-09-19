@@ -7,6 +7,7 @@ import { sendEmail } from "@/lib/mailer";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    const baseURl = process.env.BASE_URL
 
 
     const password = body.studentInfo.password.toLowerCase().trim();
@@ -43,85 +44,76 @@ export async function POST(request: NextRequest) {
       });
       if(user){
         console.log(user)
-        const expiry = new Date(new Date().getTime()+60)
+        const expiry = new Date(new Date().getTime()+60 * 60 * 1000)
+        // console.log
         const token = await prisma.confirmationToken.create({
           data:{
             expirationDate: expiry,
             userId: user.id
           }
         })
-        const mail = `
-              <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Confirmation Email</title>
-          <style>
-                  .logo-con {
-                    display: flex;
-                    justify-self: center;
-                  }
-                  .logo{
-                      width: 200px; 
-                  }
-                  .email-content {
-                    font-family: Arial, sans-serif;
-                    font-size: 16px;
-                    line-height: 1.5;
-                  }
-                  h1 {
-                    font-size: 24px;
-                  }
-                  p {
-                    margin-bottom: 16px;
-                  }
-              body {
-                  font-family: Arial, sans-serif;
-                  background-color: #f9f9f9;
-                  padding: 20px;
-              }
-              .container {
-                  max-width: 600px;
-                  margin: 0 auto;
-                  background-color: #ffffff;
-                  padding: 20px;
-                  border-radius: 8px;
-                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-              }
-              p {
-                  font-size: 16px;
-                  line-height: 1.5;
-              }
-              .header{
-                  font-weight: 600;
-                  font-size: medium;
-                  text-align: center;
-              }
-              /* Add more styles as needed */
-          </style>
-        </head>
-        <body>
-          <div class="container">
-              <div  class="logo" >
-                  <img src="https://res.cloudinary.com/ddbdbuuqw/image/upload/v1714507511/aqmada-01_kg33nv.png" class="logo"/>
-                </div>
-                <div class="email-content">
-                  <p class="header">
-                      Thank you for registering as a beta tester, 
-                  </p>
-                  <p>token ${token.token} </p>
-                  <p>
-                    Best regards,
-                  <p>
-                    Rebanniy
-                    </p>
-                  </p>
-                </div>
-          </div>
-        </body>
-        </html>
-        `;
+        const mail = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Rebanniy - Payment Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .details {
+            background-color: #f2f2f2;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Rebbaniy Islamic Learning Center
+    </div>
+    <div class="content">
+        <p>Welcome,</p>
+        
+        <p>We are delighted to confirm your enrollment at Rebanniy Islamic Learning Center. We're excited to have  ${user.firstName}  ${user.lastName} join our community of young learners.</p>
+
+        <p>At Rebanniy, we are committed to nurturing your child's Islamic education and character in a warm, supportive environment. We look forward to partnering with you in this blessed journey.</p>
+        <p>Please confirm your payment using this <a  target="_blank" href="${baseURl}/confirm?token=${token.token}&user=${user.id}">Link</a></p>
+        <p>If you have any questions, please don't hesitate to contact us at supports@rebanniy.com.</p>
+        
+        <p>May Allah bless your family and guide us all on the straight path.</p>
+        
+      
+        <p>Best Regards,<br>
+        Rebbaniy Islamic Learning Center</p>
+    </div>
+    <div class="footer">
+        © 2024 Rebbaniy Islamic Learning Center. All rights reserved.
+    </div>
+</body>
+</html> `;
 
         await sendEmail(studentInfo.email, mail);
     }

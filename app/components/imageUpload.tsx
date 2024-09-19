@@ -81,11 +81,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value}) => {
         )}
         {previews.length > 0 && (
               <div className="
-              absolute inset-0 w-full h-full">
+              absolute inset-0 w-full h-auto z-10">
                 <img
                   style={{ objectFit: 'cover' }} 
                   src={previews[0]} 
                   alt="Image" 
+                  className=""
                 />
               </div>
             )}

@@ -50,7 +50,7 @@ const [showPassword, setShowPassword] = useState(false);
           redirect:false
         })
         if(result?.status === 200 ){
-          router.push("/");
+          router.push("/admin");
           setLoading(false)
         }
         if(result?.status !== 200 ){

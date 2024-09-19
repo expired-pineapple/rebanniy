@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { IoMailOutline } from "react-icons/io5";
 import { GoEye, GoEyeClosed } from "react-icons/go";
+import { PiSpinner } from 'react-icons/pi';
 
 import {
     Select,
@@ -18,7 +19,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import ImageUpload from '@/app/components/imageUpload';
 import { Button } from '@/components/ui/button';
-import { PiSpinner } from 'react-icons/pi';
+import {
+    Card,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+  } from "@/components/ui/card";
+
 
 interface StudentInfo {
     image: string | null;
@@ -86,6 +93,7 @@ export default function Register() {
         }
     });
     const [error, setError] = useState<string | null>(null);
+
     const [errors, setErrors]= useState<Errors>({})
   
     const handleChange = (section: keyof FormData, field: string, value: string) => {
@@ -185,18 +193,15 @@ export default function Register() {
     }, [formData.studentInfo.confirmPassword])
    
   return (
-    <main className="min-h-screen">
-    <div className="black-layer relative">
-        <div className="bg-[url(https://nauthemes.com/demo/muezzin/wp-content/uploads/2023/11/tq-feat-img2-2.jpg)] bg-cover  h-full w-full absolute bg-fixed top-0 left-0 z-[-2]"></div>
-            <div className="text-center pt-[14rem] flex flex-col items-center justify-center gap-6 py-14">
-                <img decoding="async" src="https://nauthemes.com/demo/muezzin/wp-content/themes/taqwa/assets/images/prayer-head-shp.png" alt="heading-image" />
-                    <h1 className="heading text-5xl text-white">Register Now</h1>
-                    <div className="flex gap-4 items-center">
-                        <h1 className="heading text-xl text-white">Home</h1> <span className='text-white text-2xl'>/</span> <h1 className="heading text-xl text-[#DB9E30]">Register</h1>
-                </div>
-            </div>
-        </div>
-        <div className="flex flex-col items-center justify-center gap-4 py-10 sm:px-20 px-10">
+    <main className="min-h-screen flex flex-col items-center justify-center gap-4 py-10 sm:px-20 px-10">
+
+<Card className="sm:col-span-1 col-span-2 w-screen sm:w-full">
+            <CardHeader>
+                  <CardTitle>Register Student</CardTitle>
+                  <CardDescription>Fill in the form to register users</CardDescription>
+
+            </CardHeader>
+            </Card>
             <div className="flex flex-col items-center justify-center gap-4 text-center">
             <p className='text-lg text-[#DB9E30] font-semibold'>Begin Your Journey!</p>
             <p className='heading text-5xl font-semibold'>Lorem Ipsum</p>
@@ -506,7 +511,7 @@ export default function Register() {
                      
                 </div>
                 </div>
-        </div>
+        
 </main>
   )
 }
