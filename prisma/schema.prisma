@@ -7,15 +7,58 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model ConfirmationToken {
+  id             String   @id @unique @default(uuid())
+  token          String   @unique @default(uuid())
+  userId         String   @unique
+  expirationDate DateTime
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  User           User     @relation(fields: [userId], references: [id])
+}
+
+model Guardian {
+  id        String   @id @unique @default(uuid())
+  image     String?
+  firstName String
+  lastName  String
+  studentId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Student   Student  @relation(fields: [studentId], references: [id])
+}
+
+model Student {
+  id             String        @id @unique @default(uuid())
+  userId         String        @unique
+  image          String?
+  age            String
+  gender         Gender
+  studentStatus  StudentStatus
+  paymentReceipt String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  Guardian       Guardian[]
+  User           User          @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id                String             @id @unique @default(uuid())
+  firstName         String
+  lastName          String
+  username          String             @unique
+  password          String
+  isAdmin           Boolean            @default(false)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  email             String             @unique
+  ConfirmationToken ConfirmationToken?
+  Student           Student?
+}
+
 enum Gender {
   MALE
   FEMALE
-}
-
-enum StudentStatus {
-  ONLINE
-  IN_PERSON
-  HYBRID
 }
 
 enum PaymentStatus {
@@ -25,59 +68,7 @@ enum PaymentStatus {
   PARTIAL
 }
 
-model User {
-  id        String  @id @unique @default(uuid())
-  firstName String
-  lastName  String
-  username  String  @unique
-  email     String  @unique
-  password  String
-  isAdmin   Boolean @default(false)
-
-  Student Student?
-  token   ConfirmationToken?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model ConfirmationToken {
-  id String @id @unique @default(uuid())
-
-  token          String   @unique @default(uuid())
-  userId         String   @unique
-  user           User     @relation(fields: [userId], references: [id])
-  expirationDate DateTime
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Student {
-  id             String        @id @unique @default(uuid())
-  userId         String        @unique
-  user           User          @relation(fields: [userId], references: [id])
-  image          String?
-  age            String
-  gender         Gender
-  studentStatus  StudentStatus
-  paymentReceipt String?
-
-  guardian Guardian[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Guardian {
-  id        String  @id @unique @default(uuid())
-  image     String?
-  firstName String
-  lastName  String
-
-  studentId String
-  student   Student @relation(fields: [studentId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum StudentStatus {
+  WOMEN
+  CHILDREN
 }

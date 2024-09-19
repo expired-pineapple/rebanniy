@@ -12,8 +12,6 @@ export async function POST(request: NextRequest) {
     const password = body.studentInfo.password.toLowerCase().trim();
     const hashedPassword = await bycrpt.hash(password, 10);
 
-    const userUrl = `${process.env.BASE_URL}/login?employeeNumber=${body.employeeNumber}`;
-
     await db.$transaction(async (prisma:any) => {
       const studentInfo = body.studentInfo
       const user = await prisma.user.create({
@@ -35,6 +33,7 @@ export async function POST(request: NextRequest) {
           studentStatus: studentInfo.studentStatus
         },
       });
+      console.log(body)
 
       await prisma.guardian.create({
         data:{ 
@@ -48,7 +47,7 @@ export async function POST(request: NextRequest) {
         const token = await prisma.confirmationToken.create({
           data:{
             expirationDate: expiry,
-            user:{connect:user}
+            userId: user.id
           }
         })
         const mail = `

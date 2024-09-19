@@ -18,12 +18,6 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [openSidebar, setOpenSidebar] = useState(false)
 
-    const toggleMobileMenu = () => {
-      setIsMobileMenuOpen(!isMobileMenuOpen);
-    };
-
-
-  
     useEffect(() => {
       const handleScroll = () => {
         if (window.scrollY > 0) {

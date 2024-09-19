@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import Image from 'next/image'
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -18,6 +18,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import ImageUpload from '@/app/components/imageUpload';
 import { Button } from '@/components/ui/button';
+import { PiSpinner } from 'react-icons/pi';
 
 interface StudentInfo {
     image: string | null;
@@ -32,6 +33,21 @@ interface StudentInfo {
     confirmPassword: string
 }
 
+interface Errors{
+    image?: string;
+    firstName?: string;
+    lastName?: string;
+    username?: string;
+    email?: string;
+    password?: string;
+    age?: string;
+    gender?: string;
+    studentStatus?: string;
+    confirmPassword?: string
+    guardianFirstName?: string;
+    guardianLastName?: string;
+}
+
 interface GuardianInfo {
     image: string | null;
     firstName: string;
@@ -44,6 +60,7 @@ interface FormData {
 }
 
 export default function Register() {
+    const [loading, setLoading]=useState(false)
     const [step, setStep] = useState(1);
     const [guardianImage, setGuardianImage] = useState("")
     const [studentImage, setStudentImage] = useState("")
@@ -69,7 +86,9 @@ export default function Register() {
         }
     });
     const [error, setError] = useState<string | null>(null);
-
+    const [confirmPasswordError, setConfirmPasswordError] = useState(false)
+    const [errors, setErrors]= useState<Errors>({})
+  
     const handleChange = (section: keyof FormData, field: string, value: string) => {
         setFormData(prevData => ({
             ...prevData,
@@ -81,12 +100,13 @@ export default function Register() {
     };
     
     const save = async () => {
-        console.log("Save started__________________________2")
+        
         try {
+            setLoading(true)
             setFormData(prevData => ({
                 ...prevData,
                 guardianInfo: {
-                    ...prevData["studentInfo"],
+                    ...prevData["guardianInfo"],
                     ["image"]: guardianImage
                 }
             }))
@@ -97,14 +117,9 @@ export default function Register() {
                     ["image"]: studentImage
                 }
             }))
-            setFormData(prevData => ({
-                ...prevData,
-                guardianInfo: {
-                    ...prevData["guardianInfo"],
-                    ["image"]: studentImage
-                }
-            }))
+          
             
+            console.log(formData)
             const res = await fetch("http://localhost:3000/api/register/", {
                 method: "POST",
                 headers: {
@@ -126,6 +141,8 @@ export default function Register() {
         } catch (e) {
             console.error("An error occurred:", e);
             setError("An error occurred. Please try again later.");
+        }finally{
+            setLoading(false)
         }
     };
 
@@ -162,7 +179,11 @@ export default function Register() {
             }
         }
     };
-
+    useEffect(()=>{
+        if(formData.studentInfo.password !== formData.studentInfo.confirmPassword){
+            setErrors((prev) => ({ ...prev, confirmPassword: "Passwords don't match" }));
+        }
+    }, [formData.studentInfo.confirmPassword])
    
   return (
     <main className="min-h-screen">
@@ -181,14 +202,10 @@ export default function Register() {
             <p className='text-lg text-[#DB9E30] font-semibold'>Begin Your Journey!</p>
             <p className='heading text-5xl font-semibold'>Lorem Ipsum</p>
             </div>
-            {
-                error ?
-                (<div className="error"></div>):<></>
-            }
             <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 w-full" >
                     <Image src="/register.png" width={700} height={500} alt='side-image' className='h-auto hidden sm:flex'/>
                     <div className="grid grid-cols-1 gap-2">
-                        <div className="flex justify-between items-center gap-2">
+                        <div className="flex justify-between items-center gap-2 my-6">
                             <div className={`rounded-full sm:w-12 w-6 sm:h-12 h-6 sm:p-10 p-5 flex justify-center items-center text-xl text-white heading cursor-pointer hover:bg-[#08513F] ${step ==1 ? "bg-[#08513F]" :"bg-gray-400"}`} onClick={()=>{setStep(1)}}>
                                 1
                             </div>
@@ -201,6 +218,10 @@ export default function Register() {
                                 3
                             </div>
                         </div>
+                        {
+                error ?
+                (<div className="error text-red-700 h-fit px-4 py-2 border border-red-300 bg-red-500/[20%] rounded-lg w-full text-center">{error}</div>):<></>
+            }
                         {step === 1 && (
                 <AnimatePresence>
                     <motion.div
@@ -221,7 +242,18 @@ export default function Register() {
                                         placeholder="John" 
                                         value={formData.studentInfo.firstName}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'firstName', e.target.value)}
+                                        required
+                                        onBlur={(e) => {
+                                            if (!e.target.value) {
+                                              setErrors((prev) => ({ ...prev, firstName: "Field is required" }));
+                                            } else {
+                                              setErrors((prev) => ({ ...prev, firstName: "" }));
+                                            }
+                                          }}
                                     />
+                                     {errors?.firstName && (
+                                        <p className="text-red-500 font-semibold">{errors?.firstName}</p>
+                                    )}
                                 </div>
                                 <div className="grid w-full items-center gap-1.5">
                                     <Label htmlFor="last_name" className="font-semibold">Last Name:</Label>
@@ -231,7 +263,17 @@ export default function Register() {
                                         placeholder="Doe" 
                                         value={formData.studentInfo.lastName}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'lastName', e.target.value)}
+                                        onBlur={(e) => {
+                                            if (!e.target.value) {
+                                              setErrors((prev) => ({ ...prev, lastName: "Field is required" }));
+                                            } else {
+                                              setErrors((prev) => ({ ...prev, lastName: "" }));
+                                            }
+                                          }}
                                     />
+                                     {errors?.lastName && (
+                                        <p className="text-red-500 font-semibold">{errors?.lastName}</p>
+                                    )}
                                 </div>
                             </div>
                             <div className="grid w-full items-center gap-1.5">
@@ -242,7 +284,17 @@ export default function Register() {
                                         placeholder="john.doe@rebbaniy.com" 
                                         value={formData.studentInfo.email}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'email', e.target.value)}
+                                        onBlur={(e) => {
+                                            if (!e.target.value) {
+                                              setErrors((prev) => ({ ...prev, email: "Field is required" }));
+                                            } else {
+                                              setErrors((prev) => ({ ...prev, email: "" }));
+                                            }
+                                          }}
                                     />
+                                     {errors?.email && (
+                                        <p className="text-red-500 font-semibold">{errors?.email}</p>
+                                    )}
                                 </div>
                             <div className="grid w-full items-center gap-1.5">
                                 <Label htmlFor="username" className="font-semibold">Username:</Label>
@@ -252,7 +304,17 @@ export default function Register() {
                                     placeholder="john.doe" 
                                     value={formData.studentInfo.username}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'username', e.target.value)}
+                                    onBlur={(e) => {
+                                        if (!e.target.value) {
+                                          setErrors((prev) => ({ ...prev, email: "Field is required" }));
+                                        } else {
+                                          setErrors((prev) => ({ ...prev, email: "" }));
+                                        }
+                                      }}
                                 />
+                                 {errors?.email && (
+                                    <p className="text-red-500 font-semibold">{errors?.email}</p>
+                                )}
                             </div>
                             <div className="grid w-full items-center gap-1.5">
                                     <Label htmlFor="age" className="font-semibold">Age:</Label>
@@ -262,7 +324,17 @@ export default function Register() {
                                         placeholder="20" 
                                         value={formData.studentInfo.age}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'age', e.target.value)}
+                                        onBlur={(e) => {
+                                            if (!e.target.value) {
+                                              setErrors((prev) => ({ ...prev, age: "Field is required" }));
+                                            } else {
+                                              setErrors((prev) => ({ ...prev, age: "" }));
+                                            }
+                                          }}
                                     />
+                                     {errors?.age && (
+                                        <p className="text-red-500 font-semibold">{errors?.age}</p>
+                                    )}
                                 </div>
                             <div className="grid w-full items-center gap-1.5">
                                 <Label htmlFor="gender" className="font-semibold">Gender:</Label>
@@ -280,12 +352,12 @@ export default function Register() {
                                 <Label htmlFor="preference" className="font-semibold">Preference:</Label>
                                     <Select  value={formData.studentInfo.studentStatus} onValueChange={(e) => handleChange('studentInfo', 'studentStatus', e)} >
                                         <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="ONLINE" />
+                                            <SelectValue placeholder="Women" />
                                         </SelectTrigger>
                                         <SelectContent className='w-full'>
-                                            <SelectItem value="ONLINE">Online</SelectItem>
-                                            <SelectItem value="IN_PERSON">In Person</SelectItem>
-                                            <SelectItem value="HYBRID">Hybrid</SelectItem>
+                                            <SelectItem value="WOMEN">Women</SelectItem>
+                                            <SelectItem value="CHILDREN">Children</SelectItem>
+                                            
                                         </SelectContent>
                                         </Select>
                             </div>
@@ -320,7 +392,13 @@ export default function Register() {
                                         placeholder="********"
                                         value={formData.studentInfo.confirmPassword}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange('studentInfo', 'confirmPassword', e.target.value)}
-                                        
+                                        onBlur={(e) => {
+                                            if (!e.target.value) {
+                                              setErrors((prev) => ({ ...prev, confirmPassword: "Field is required" }));
+                                            } else {
+                                              setErrors((prev) => ({ ...prev, confirmPassword: "" }));
+                                            }
+                                          }}
                                     />
                                           <button
                                             type="button"
@@ -330,6 +408,9 @@ export default function Register() {
                                             {showConfirmPassword ? <GoEye /> : <GoEyeClosed />}
                                         </button>
                                         </div>
+                                        {errors?.confirmPassword && (
+                                        <p className="text-red-500 font-semibold">{errors?.confirmPassword}</p>
+                                    )}
                             </div>
                         </div>
                     </motion.div>
@@ -406,7 +487,20 @@ export default function Register() {
                     disabled={step === 3} 
                     onClick={handleNext}
                 >
-                    {step < 2 ? "Next" : "Save"}
+                     {loading ? (
+                  <div className="flex items-center justify-center">
+                    <PiSpinner className="h-4 w-4 mr-2 animate-spin text-white" />
+                  <p>
+                    Loading
+                  </p>
+                  </div>
+                ) : (
+                    <>
+                     {step < 2 ? "Next" : "Save"}
+                    </>
+                   
+                )}
+                    
                 </Button>
             </div>
                     </div>

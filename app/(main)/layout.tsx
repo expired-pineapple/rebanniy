@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@/app/globals.css";
 import Footer from '@/app/components/footer'
 import {Cinzel_Decorative, Montserrat} from 'next/font/google'
 import Navbar from "@/app/components/navbar";
@@ -11,7 +11,7 @@ const cinzel = Cinzel_Decorative({
 })
 
 export const metadata: Metadata = {
-  title: "Rebaniy"
+  title: "Rebanniy"
 };
 
 export default function RootLayout({
