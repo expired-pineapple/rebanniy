@@ -460,9 +460,9 @@ className="grid sm:grid-cols-2 grid-cols-1 gap-2"
             >
                 <IoMailOutline className='text-7xl text-[#08513F]'/>
                 <div className="text-center w-1/2 flex flex-col justify-center items-center">
-                <h1 className="heading text-5xl text-[#08513F]">Thank you for registering!</h1>
+                <h1 className="heading text-5xl text-[#08513F]">User has been successfully!</h1>
                     <div className="flex gap-4 items-center">
-                      <h1 className="heading text-xl text-[#DB9E30]">Please check your inbox for a confirmation email</h1>
+                      <h1 className="heading text-xl text-[#DB9E30]">Token will expire in a hour.</h1>
                 </div>
                 </div>
         </motion.div>
