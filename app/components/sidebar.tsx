@@ -5,29 +5,19 @@ import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@radix
 import {Users2} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {Sheet, SheetTrigger, SheetContent, SheetClose } from "@/components/ui/sheet"
-import { FiMapPin } from "react-icons/fi";
-import { LuFileSignature } from "react-icons/lu"; 
 import { RiAccountPinCircleLine } from "react-icons/ri";
 import { MdWaves } from "react-icons/md";
 import { CiLogout} from "react-icons/ci";
 import { usePathname   } from "next/navigation"
-import { BsClockHistory } from "react-icons/bs";
+import { MdOutlineSupervisorAccount } from "react-icons/md";
 import { signOut } from "next-auth/react";
 
-interface SidebarProps {
-  admin?: boolean
-}
 
 
-
-const SideBar: React.FC<SidebarProps> = ({admin }) => {
+const SideBar = () => {
   const r  = usePathname();
-  const isStudent = r === "/admin"
-  const isEmployee = r === "/employee"
-  const isLocation = r === '/configs/location'
-  const isPayrollPeriods = r === '/payrollPeriods'
-  const is  = r === '/ s'
-  const isPayroll = r === '/employee/payroll'
+  const isStudent = r === "/dashbaord"
+  const isAdmin = r === "/dashboard/admin"
 
 
     return( 
@@ -37,7 +27,7 @@ const SideBar: React.FC<SidebarProps> = ({admin }) => {
           <Link
             href="#"
             className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
-          >
+          > 
             <MdWaves className="h-4 w-4 transition-all group-hover:scale-110" />
             <span className="sr-only">Rebiyanni</span>
           </Link>
@@ -45,7 +35,7 @@ const SideBar: React.FC<SidebarProps> = ({admin }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/"
+                href="/dashboard"
                 className={`flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground md:h-8 md:w-8 transition-colors
                   ${isStudent ? "bg-accent text-black" : ""}`
                 }
@@ -57,6 +47,22 @@ const SideBar: React.FC<SidebarProps> = ({admin }) => {
             <TooltipContent side="right">Students</TooltipContent>
           </Tooltip>
           </TooltipProvider>
+          <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href="/dashboard/admin"
+                className={`flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground md:h-8 md:w-8 transition-colors
+                  ${isAdmin ? "bg-accent text-black" : ""}`
+                }
+              >
+                <RiAccountPinCircleLine className={`h-5 w-5  ${isAdmin ? "text-black " : ""}`} />
+                <span className="sr-only">Admin</span>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right">Admins</TooltipContent>
+          </Tooltip>
+          </TooltipProvider>
 
         </nav>
 
@@ -66,7 +72,7 @@ const SideBar: React.FC<SidebarProps> = ({admin }) => {
           <Sheet>
             <SheetTrigger asChild>
               <Button size="icon" variant="outline" className="lg:hidden">
-                <Users2 className="h-5 w-5" />
+                <MdOutlineSupervisorAccount className="h-5 w-5" />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
@@ -77,18 +83,25 @@ const SideBar: React.FC<SidebarProps> = ({admin }) => {
                   href="#"
                   className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground lg:text-base"
                 >
-                  <Users2 className="h-5 w-5 transition-all group-hover:scale-110" />
+                  <MdOutlineSupervisorAccount className="h-5 w-5 transition-all group-hover:scale-110" />
                   <span className="sr-only">Rebbani</span>
                 </Link>
                 </div>
                 <Link
-                  href="/admin"
+                  href="/dashboard"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                   <Users2 className="h-5 w-5" />
+                   <MdOutlineSupervisorAccount className="h-5 w-5" />
                    <span>Students</span>
                 </Link>
-
+                <Link
+                  href="/dashboard/admin"
+                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                   <RiAccountPinCircleLine className="h-5 w-5" />
+                   <span>Admin</span>
+                </Link>
+                
               </nav>
             </SheetContent>
           </Sheet>

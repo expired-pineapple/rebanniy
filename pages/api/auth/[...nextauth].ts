@@ -17,8 +17,14 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         try {
-        const user = await db.user.findUnique({
-          where: { username: credentials?.username as string },
+        const user = await db.user.findFirst({
+          where: {
+            OR:[{
+              username: credentials?.username as string,
+              },
+            {  email: credentials?.username as string}
+            ]
+           },
         });
 
 
@@ -39,6 +45,7 @@ export const authOptions: AuthOptions = {
 
         return user;
       }catch(error:any){
+        console.log(error)
         throw new Error("Something went wrong");
       }
     }

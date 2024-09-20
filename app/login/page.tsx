@@ -8,8 +8,6 @@ import { GoEye } from "react-icons/go";
 import { GoEyeClosed  } from "react-icons/go";
 import { PiSpinner } from "react-icons/pi";
 import { useToast } from "@/hooks/use-toast";
-import axios from 'axios'
-
 interface Errors {
   username?: string;
   password?: string;
@@ -35,7 +33,7 @@ const [showPassword, setShowPassword] = useState(false);
     setErrors({});
 
     if (!username) {
-      setErrors((prev) => ({ ...prev, username: "Employee Number is required" }));
+      setErrors((prev) => ({ ...prev, username: "Username is required" }));
     }
     if (!password) {
       setErrors((prev) => ({ ...prev, password: "Password is required" }));
@@ -46,11 +44,11 @@ const [showPassword, setShowPassword] = useState(false);
         const result = await signIn("credentials", {
           username: username.toLowerCase().trim(),
           password: password.trim(),
-          callbackUrl: "/admin",
+          callbackUrl: "/dashboard",
           redirect:false
         })
         if(result?.status === 200 ){
-          router.push("/admin");
+          router.push("/dashboard");
           setLoading(false)
         }
         if(result?.status !== 200 ){
@@ -95,18 +93,18 @@ const [showPassword, setShowPassword] = useState(false);
               }
               <div className="username ">
                 <label htmlFor="username" className="font-medium text-md">
-                  Employee Number
+                Email or Username
                 </label>
                 <input
                       type="text"
                       className={`block rounded-md border-0 dark:text-white py-1.5 pl-7 sm:pr-10 pr:10 w-full text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#003949] sm:text-sm sm:leading-6 ${errors.username ? 'ring-red-300' : ''}`}
-                      placeholder="EN001"
+                      placeholder="Email or Username"
                       value={username}
                       onChange={(e) => setusername((e.target.value))}
                       required
                       onBlur={(e) => {
                         if (!e.target.value) {
-                          setErrors((prev) => ({ ...prev, username: "Employee Number is required" }))
+                          setErrors((prev) => ({ ...prev, username: "Username is required" }))
                         } 
                         else{
                           setErrors((prev) => ({ ...prev, username: "" }))

@@ -66,7 +66,7 @@ export default function Home() {
 <div className="grid sm:grid-cols-2 grid-cols-1 gap-10 sm:px-20 my-10 text-left sm:w-3/4">
   <div className="sm:text-xl text-md text-slate-700">
     <p>
-    Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin. This is Photoshops version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean itudin. This is Photoshops sion of Lorem Ipsum. Proin gravia nibh vel velit auctor aliquet. This is Photoshops versionf Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin.
+    Rebanniy Islamic Center is a community hub dedicated to preserving and promoting Islamic values in Addis Ababa, Ethiopia. We strive to create a welcoming environment for all, fostering spiritual growth, education, and community service.
     </p>
   </div>
   <div className="flex flex-col gap-8">
@@ -77,8 +77,8 @@ export default function Home() {
   
     </div>
       <div className="flex flex-col">
-        <p className="heading text-xl font-semibold">Our Vision</p>
-        <p>Nibh vel velit auctor aliquet. Aenean ituin. This is Photoshops version of Photoshops sion of Lorem.</p>
+        <p className="heading text-xl font-semibold">Our Mission</p>
+        <p>Provide comprehensive Islamic education programs for all ages, including Quran reading and Islamic studies.</p>
       </div>
     </div>
     <div  className="flex gap-4 group flex-col sm:flex-row items-center text-center sm:text-left">
@@ -89,7 +89,7 @@ export default function Home() {
     </div>
       <div className="flex flex-col">
         <p className="heading text-2xl font-semibold">Our Vision</p>
-        <p>Nibh vel velit auctor aliquet. Aenean ituin. This is Photoshops version of Photoshops sion of Lorem.</p>
+        <p>To be a beacon of Islamic knowledge and practice, nurturing a vibrant Muslim community that contributes positively to the broader society while staying true to its faith and values.</p>
       </div>
     </div>
   </div>
@@ -145,7 +145,7 @@ export default function Home() {
   <h4  className="text-xl font-semibold mb-2 text-center">
     <span className="text-gray-800 hover:text-[#DB9E30] heading text-4xl">Quran Learning</span>
   </h4>
-  <p  className="text-gray-600 text-lg text-center">Provide rehab facility dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci...</p>
+  <p  className="text-gray-600 text-lg text-center">Offer comprehensive Islamic education programs for all ages, including Quran learning and Islamic studies.</p>
 </div>
 <div  className="flex flex-col items-center justify-center w-full max-w-xs p-6">
   <div  className="relative mb-4">
@@ -159,9 +159,9 @@ export default function Home() {
   </div>
   <h4  className="text-xl font-semibold mb-2 text-center">
     <span className="text-gray-800 hover:text-[#DB9E30] heading text-4xl">
-    Funeral Service</span>
+    Education</span>
   </h4>
-  <p  className="text-gray-600 text-lg text-center">Provide rehab facility dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci...</p>
+  <p  className="text-gray-600 text-lg text-center">Quran learning classes with tajweed for children and adults</p>
 </div>
     </div>
     <div  className="w-full lg:w-1/2 flex justify-center">
@@ -187,9 +187,9 @@ export default function Home() {
     <FaMosque className="text-white absolute top-10 left-10 text-5xl"/>
   </div>
   <h4  className="text-xl font-semibold mb-2 text-center">
-    <span className="text-gray-800 hover:text-[#DB9E30] heading text-4xl">Mosque Renovation</span>
+    <span className="text-gray-800 hover:text-[#DB9E30] heading text-4xl">Spiritual Guidance</span>
   </h4>
-  <p  className="text-gray-600 text-xl text-center">Provide rehab facility dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci...</p>
+  <p  className="text-gray-600 text-xl text-center">Provide a nurturing space for Muslims to strengthen their faith and connect with Allah.</p>
 </div>
 <div  className="flex flex-col items-center justify-center w-full max-w-xs p-6">
   <div  className="relative mb-4">
@@ -201,11 +201,11 @@ export default function Home() {
     </svg>
     <FaHandsHelping className="text-white absolute top-10 left-10 text-5xl"/>
   </div>
-  <h4  className="text-xl font-semibold mb-2 text-left">
+  <h4  className="text-xl font-semibold mb-2">
     <span className="text-gray-800 hover:t/ext-[#DB9E30] heading text-4xl text-center">
-    Help Poor</span>
+    Youth Development</span>
   </h4>
-  <p className="text-gray-600 text-xl text-center">Provide rehab facility dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci...</p>
+  <p className="text-gray-600 text-xl text-center">Empower the next generation with strong Islamic values and leadership skills.</p>
 </div>
     </div>
   </div>

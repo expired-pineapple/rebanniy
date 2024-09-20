@@ -10,15 +10,13 @@ export async function getSession() {
 export default async function getCurrentUser() {
   try {
     const session = await getSession();
-     // @ts-expect-error
-    if (!session?.user?.username) {
+    if (!session?.user?.email) {
       return null;
     }
 
     const currentUser = await db.user.findUnique({
       where: {
-        // @ts-expect-error
-        username: session.user.username as string,
+        username: session.user.email as string,
       }});
 
     if (!currentUser) {
