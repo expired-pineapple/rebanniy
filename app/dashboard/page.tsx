@@ -14,6 +14,7 @@ import { FiUserPlus } from "react-icons/fi";
 import { DataTable } from "@/components/ui/data-table";
 import { RxCaretSort } from "react-icons/rx";
 import { ColumnDef } from "@tanstack/react-table";
+import { GoEye } from "react-icons/go";
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -37,6 +38,7 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Link from "next/link";
 type PaymentStatus = 'UNPAID' | 'PAID' | 'PENDING';
 
 type ColorScheme = {
@@ -179,7 +181,7 @@ export default function Dashboard() {
       )},
     },
     {
-      accessorKey: "preference",
+      accessorKey: "studentStatus",
       header: ({ column }) => {
         return (
           <span className="text-left font-medium">
@@ -202,7 +204,7 @@ export default function Dashboard() {
         const colors = colorMapper[status] || colorMapper.unpaid; 
       
         return (
-          <div className={`border ${colors.border} px-2 py-1 mx-auto rounded-full ${colors.bg} ${colors.text} font-medium text-center text-xs`}>
+          <div className={`border ${colors.border} px-4 py-2  rounded-full ${colors.bg} ${colors.text} font-medium text-center text-xs w-fit`}>
             {row.getValue("paymentStatus")}
           </div>
         );
@@ -216,28 +218,9 @@ export default function Dashboard() {
        
         return (
           <>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem 
-                >
-                Student Details
-                
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  Edit Student
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  Delete Student
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>  
+          <Button variant={"ghost"} onClick={()=>{ router.push(`/dashboard/student/${row.original.id}`)}}>
+            <GoEye className="text-blue-600 text-xl"/>
+          </Button>
           </>
         )}
 
