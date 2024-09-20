@@ -1,15 +1,18 @@
 "use client";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { LuFileSpreadsheet } from "react-icons/lu";
-import { Button } from "@/components/ui/button";
+import Image from 'next/image'
+import { IoReceiptOutline } from "react-icons/io5";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
+  CardContent
 } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { FiUserPlus } from "react-icons/fi";
+import { VscAccount } from "react-icons/vsc";
 
 import { DataTable } from "@/components/ui/data-table";
 import { RxCaretSort } from "react-icons/rx";
@@ -37,202 +40,156 @@ import {
 
 import { MoreHorizontal } from "lucide-react";
 import { useRouter, useParams } from "next/navigation";
+import axios from "axios";
 
 
 export default function StudentDetail() {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([])
+  const [data, setData] = useState<any>({})
   const [dialog, setDialog] = useState(false)
   const [error, setError] = useState(null)
-  const router = useRouter()
   const params = useParams()
 
 
-  // const fetchStudentData = async () => {
-  //   try {
-  //     setLoading(true);
+  const fetchStudentData = async () => {
+    try {
+      setLoading(true);
 
-  //     // Make the API call with all applicable params
-  //     const res = await axios.get("/api/customers/");
+      // Make the API call with all applicable params
+      const res = await axios.get(`/api/student/${params?.id}`);
   
-  //     if (res.status === 200) {
-  //       const response = res.data
-  //       console.log(response)
-  //       setData(response);
-  //     }
-  //   } catch (e: any) {
-  //     setData([]);
-  //     setError(e.response?.data?.message || "An error occurred");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+      if (res.status === 200) {
+        const response = res.data
+        console.log(response)
+        setData(response);
+      }
+    } catch (e: any) {
+      setData([]);
+      setError(e.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-
-  const columns: ColumnDef<any>[] = [  
-    {
-      accessorKey: "username",
-  
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-          Employee Number
-            <RxCaretSort className="ml-2 h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => <div className="text-left">{row.getValue("username")}</div>,
-    },
-    {
-      accessorKey: "locations",
-  
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-          Location
-            <RxCaretSort className="ml-2 h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => <div className="text-left">{row.getValue("locations")}</div>,
-    },
-    {
-      accessorKey: "date",
-  
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-          Date
-            <RxCaretSort className="ml-2 h-4 w-4" />
-          </Button>
-        );
-      },
-      cell:  ({ row }) => {
-        return ( <div className="text-left"><span></span>{row.getValue("date")}</div>
-      )},
-    },
-    {
-      accessorKey: "check_in_time",
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Check In Time
-            <RxCaretSort className="ml-2 h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => {
-        return <span className="text-left font-medium">{row.getValue("check_in_time")}</span>;
-      },
-    },
-  
-    {
-      accessorKey: "check_out_time",
-      header: () => <div className="text-left">Checkout Time</div>,
-      cell: ({ row }) => {
-        return( <span className="text-left font-medium">
-          
-          {row.getValue("check_out_time")}</span>)
-      },
-    },
-  
-    {
-      accessorKey: "duration",
-      header: () => <div className="text-left">Duration(hours)</div>,
-      cell: ({ row }) => {
-  
-        return <span className="text-left font-medium">{row.getValue("duration")}</span>;
-      },
-    },
-      
-    {
-      accessorKey: "remark",
-      header: () => <div className="text-left">Remark</div>,
-      cell: ({ row }) => {
-  
-        return <span className="text-left font-medium">{row.getValue("remark")}</span>;
-      },
-    },
-    {
-      accessorKey: "edited",
-      header: () => <div className="text-left"></div>,
-      cell: ({ row }) => {
-        const edited = row.original.edited;
-        return (
-          <div className={edited ? "border border-red-500 px-2 py-1 mx-auto rounded-full bg-red-50/50 text-red-700 font-medium text-center text-xs" : "border border-emerald-500 px-2 py-1 mx-auto rounded-full bg-emerald-50/50 text-emerald-700 font-medium text-center text-xs"}>
-            {edited ? "Edited" : "Unedited"}
-          </div>
-        );
-      },
-    },
-    {
-      accessorKey: "action",
-      header: () => <div className="text-left"></div>,
-      cell: ({ row }) => {
-       
-        return (
-          <>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem 
-                >
-                Student Details
-                
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  Edit Student
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  Delete Student
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>  
-          </>
-        )}
-
-    },
-  ];
-  
-
-
-  // useEffect(() => {
-  //     fetchStudentData()
-  // }, []);
+  useEffect(()=>{
+    fetchStudentData()
+  }, [])
 
   return (
     <div className="flex h-screen w-full flex-col  mx-auto">
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+        <Tabs defaultValue="student" className="w-full">
+          <TabsList>
+            <TabsTrigger value="student">Student Information</TabsTrigger>
+            <TabsTrigger value="guardian">Guardian Information</TabsTrigger>
+            <TabsTrigger value="payment">Payment Details</TabsTrigger>
+          </TabsList>
+          <TabsContent value="student" className="w-3/4">
           <Card className="sm:col-span-1 col-span-2 w-screen sm:w-full">
             <CardHeader>
-                  <CardTitle>Details for Student</CardTitle>
-                  <CardDescription></CardDescription>
-
+                  <CardTitle>Student Details</CardTitle>
             </CardHeader>
-            
-              <DataTable columns={columns} data={[...data]} search={"username"} loading={loading} />
-            
+            <CardContent>
+            <div className="flex gap-10">
+              {
+               ( data.image !== "") ? (
+                <Image src={data.image} width={100} height={100} alt="sideImage"/>
+               ) : (
+                <div className="text-9xl from-neutral-800">
+                  <VscAccount />
+                </div>
+               )}
+                        
+                        <div className="flex flex-col gap-4 w-full justify-center">
+                            <div className="flex gap-10 items-center">
+                                <div className="grid items-center gap-1.5">
+                                    <Label htmlFor="first_name" className="font-semibold">First Name:</Label>
+                                    <Input value={data?.User?.firstName} disabled />   
+                                </div>
+                                <div className="grid items-center gap-1.5">
+                                    <Label htmlFor="last_name" className="font-semibold">Last Name:</Label>
+                                    <Input value={data?.User?.lastName} disabled />
+                                </div>
+                            </div>
+                            <div className="grid w-full items-center gap-1.5">
+                                    <Label htmlFor="email" className="font-semibold">Email:</Label>
+                                    <Input value= {data?.User?.email} disabled />  
+                                </div>
+                            <div className="grid w-full items-center gap-1.5">
+                                <Label htmlFor="username" className="font-semibold">Username:</Label>
+                                <Input value= {data?.User?.username} disabled />  
+                            </div>
+                            <div className="grid w-full items-center gap-1.5">
+                                    <Label htmlFor="age" className="font-semibold">Age:</Label>
+                                    <Input value= {data?.age} disabled />  
+                                </div>
+                            <div className="grid w-full items-center gap-1.5">
+                                <Label htmlFor="gender" className="font-semibold">Gender:</Label>
+                                <Input value= {data?.gender} disabled />  
+                            </div>
+                            <div className="grid w-full items-center gap-1.5">
+                                <Label htmlFor="preference" className="font-semibold">Preference:</Label>
+                                <Input value= {data?.studentStatus} disabled />  
+                            </div>
+                        </div>
+                    </div>
+            </CardContent>
           </Card>
 
+          </TabsContent>
+          <TabsContent value="guardian">
+          <Card className="sm:col-span-1 col-span-2 w-screen sm:w-full">
+            <CardHeader>
+                  <CardTitle>Guardian Details</CardTitle>
+            </CardHeader>
+            <CardContent>
+            {data.Guardian?.map((guardian:any, index:any) => (
+            <div className="flex gap-10" key={index}>
+              
+              {
+               ( data.image !== "") ? (
+                <Image src={guardian.image} width={100} height={100} alt="sideImage"/>
+               ) : (
+                <div className="text-9xl from-neutral-800">
+                  <VscAccount />
+                </div>
+               )}
+                        
+                        <div className="flex flex-col gap-4 w-full justify-center">
+                          
+                                <div className="grid items-center gap-1.5">
+                                    <Label htmlFor="first_name" className="font-semibold">First Name:</Label>
+                                    <Input value={guardian?.firstName} disabled />   
+                                </div>
+                                <div className="grid items-center gap-1.5">
+                                    <Label htmlFor="last_name" className="font-semibold">Last Name:</Label>
+                                    <Input value={guardian?.lastName} disabled />
+                                </div>
+                            
+                        </div>
+                    </div>
+            ))}
+            </CardContent>
+          </Card>
+          </TabsContent>
+          <TabsContent value="payment" className="w-fit">
+          <Card className="sm:col-span-1 col-span-2 w-screen sm:w-full">
+            <CardHeader>
+                  <CardTitle>Payment Receipt</CardTitle>
+            </CardHeader>
+            <CardContent className="px-10 py-10">
+              {(data.paymentReceipt) ?
+              (<img src={data.paymentReceipt} className="w-full h-full"/>):
+              <div className="flex flex-col w-full items-center">
+                <IoReceiptOutline className="text-9xl"/>
+                <p className="text-lg px-10 font-semibold">Payment Recipt hasn't been uploaded</p>
+              </div>
+              }
+            </CardContent>
+          </Card>
+          </TabsContent>
+        </Tabs>
         </main>
       </div>
     </div>

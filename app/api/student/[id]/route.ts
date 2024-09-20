@@ -21,6 +21,7 @@ export async function GET(request: NextRequest,  { params }: { params: { id: str
                 User: true
             }
         });
+        console.log(student)
 
         return NextResponse.json(student);
     }catch(error){

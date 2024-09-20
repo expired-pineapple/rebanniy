@@ -204,7 +204,7 @@ export default function Dashboard() {
         const colors = colorMapper[status] || colorMapper.unpaid; 
       
         return (
-          <div className={`border ${colors.border} px-4 py-2  rounded-full ${colors.bg} ${colors.text} font-medium text-center text-xs w-fit`}>
+          <div className={`text-xs border ${colors.border} px-4 py-2  rounded-full ${colors.bg} ${colors.text} font-medium text-center w-fit`}>
             {row.getValue("paymentStatus")}
           </div>
         );
