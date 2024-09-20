@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -81,6 +81,7 @@ export default function Register() {
     };
  
   return (
+ 
     <main className="min-h-screen">
     <div className="black-layer relative">
         <div className="bg-[url(https://nauthemes.com/demo/muezzin/wp-content/uploads/2023/11/tq-feat-img2-2.jpg)] bg-cover  h-full w-full absolute bg-fixed top-0 left-0 z-[-2]"></div>
