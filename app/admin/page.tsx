@@ -14,7 +14,6 @@ import { FiUserPlus } from "react-icons/fi";
 import { DataTable } from "@/components/ui/data-table";
 import { RxCaretSort } from "react-icons/rx";
 import { ColumnDef } from "@tanstack/react-table";
-import axios from "axios";
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -42,31 +41,28 @@ import { useRouter } from "next/navigation";
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([])
-  const [dialog, setDialog] = useState(false)
   const [error, setError] = useState(null)
   const router = useRouter()
 
 
 
-  const fetchStudentData = async () => {
-    try {
-      setLoading(true);
-
-      // Make the API call with all applicable params
-      const res = await axios.get("/api/customers/");
+  // const fetchStudentData = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const res = await axios.get("/api/customers/");
   
-      if (res.status === 200) {
-        const response = res.data
-        console.log(response)
-        setData(response);
-      }
-    } catch (e: any) {
-      setData([]);
-      setError(e.response?.data?.message || "An error occurred");
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     if (res.status === 200) {
+  //       const response = res.data
+  //       console.log(response)
+  //       setData(response);
+  //     }
+  //   } catch (e: any) {
+  //     setData([]);
+  //     setError(e.response?.data?.message || "An error occurred");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
 
   const columns: ColumnDef<any>[] = [  
@@ -214,9 +210,9 @@ export default function Dashboard() {
   
 
 
-  useEffect(() => {
-      fetchStudentData()
-  }, []);
+  // useEffect(() => {
+  //     fetchStudentData()
+  // }, []);
 
   return (
     <div className="flex h-screen w-full flex-col  mx-auto">
