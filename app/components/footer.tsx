@@ -14,40 +14,39 @@ return(
           <h3 className="text-3xl font-bold heading">Inspired? Join Us Right Now!</h3>
 		  </div>
         </div>
-        <a href="/register" className="px-6 py-3 bg-[#DB9E30] text-white rounded-full font-semibold hover:bg-opacity-90 transition duration-300">Join Community</a>
+        <a href="/register" className="px-6 py-3 bg-[#DB9E30] text-white rounded-full font-semibold hover:bg-opacity-90 transition duration-300">Register</a>
       </div>
       <div className="flex flex-col justify-between py-10 sm:flex-row">
 
         <div className="py-4">
           <h4 className="text-xl font-semibold mb-4 heading">Information</h4>
-          <p className="text-lg sm:w-1/2">Elit duis volutpat ligula nulla a getmolestie mi consectetur auctor ugue ac tincidunt, var ius felis et, augue lorem. Aliquam accumsan fringilla.</p>
+          <p className="text-lg sm:w-1/2">Rebanniy Islamic Center is a community hub dedicated to preserving and promoting Islamic values in Addis Ababa, Ethiopia. We strive to create a welcoming environment for all, fostering spiritual growth, education, and community service.</p>
         </div>
         <div className="flex sm:flex-row flex-col gap-6 w-[60%]">
-        <div className="w-full">
+        <div className="w-full" id="contact">
           <h4 className="text-xl font-semibold mb-4 heading">Contact Info</h4>
           <ul className="space-y-4">
             <li className="flex items-start">
               <div>
-                <span className="block">Hotline: <a href="tel:+251 9123 789 09" className="hover:underline">+251 9123 789 09</a></span>
-                <span className="text-sm">Mon - Sat: 9.00 am - 6.00 pm</span>
+                <span className="block">Phone number: <a href="tel:+251 970 44 9079" className="hover:underline">+251 970 44 9079</a></span>
+                <span className="block">Phone number: <a href="tel:+251 970 44 8879" className="hover:underline">+251 970 44 8879</a></span>
               </div>
             </li>
             <li className="flex items-center">
-              <a href="mailto:username@domain.com" className="hover:underline">username@domain.com</a>
+              <a href="mailto:username@domain.com" className="hover:underline">support@rebbaniy.com</a>
             </li>
             <li className="flex items-center">
-              <span>New Orleans, Jamia Mosque</span>
+              <span>Addis Ababa, Ethiopia</span>
             </li>
           </ul>
         </div>
         <div className="w-full">
           <h4 className="text-xl font-semibold mb-4 heading">Quick Links</h4>
           <ul className="space-y-2">
-            <li><a href="#" className="hover:underline">Home – Islamic Center</a></li>
-            <li><a href="#" className="hover:underline">Salat Timings</a></li>
-            <li><a href="#" className="hover:underline">Travel & Tours</a></li>
-            <li><a href="#" className="hover:underline">Online Classes</a></li>
-            <li><a href="#" className="hover:underline">Term Conditions</a></li>
+            <li><a href="#" className="hover:underline">Home</a></li>
+            <li><a href="#services" className="hover:underline">Services</a></li>
+            <li><a href="#about" className="hover:underline">About</a></li>
+            <li><a href="#contact" className="hover:underline">Contact</a></li>
           </ul>
         </div>
         </div>

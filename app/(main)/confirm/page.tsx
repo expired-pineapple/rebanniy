@@ -88,8 +88,8 @@ export default function Register() {
         </div>
         <div className="flex flex-col items-center justify-center gap-4 py-10 sm:px-20 px-10">
             <div className="flex flex-col items-center justify-center gap-4 text-center">
-            <p className='text-lg text-[#DB9E30] font-semibold'>Begin Your Journey!</p>
-            <p className='heading text-5xl font-semibold'>Lorem Ipsum</p>
+            <p className='text-lg text-[#DB9E30] font-semibold'>Welcome Back!</p>
+            <p className='heading text-5xl font-semibold'>Upload your payment receipt</p>
             </div>
             <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 w-full" >
                     <Image src="/register.png" width={700} height={500} alt='side-image' className='h-auto hidden sm:flex'/>

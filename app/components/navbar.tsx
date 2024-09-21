@@ -96,7 +96,7 @@ const Navbar = () => {
                     <CgMenuRight className="text-4xl" />
                   </div>
                   <a href="/register" className="bg-[#DB9E30] px-6 py-2 rounded-full text-md z-10 text-white cursor-pointer hidden sm:flex">
-                    Join Community
+                    Register
                   </a>
                   </div>
                

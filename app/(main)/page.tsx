@@ -59,7 +59,7 @@ export default function Home() {
 <div className="flex flex-col gap-4 w-full items-center justify-center text-center px-20 min-h-screen pb-20">
  <div className="mt-44"></div>
 <img decoding="async" src="https://nauthemes.com/demo/muezzin/wp-content/plugins/ingeniofy-plus/elementor-widgets/widgets_classes/../../assets/images/shape2.png" alt="" />
-    <h3 className="text-slate-500 capitalize heading text-3xl">Welcome to the Islamic center</h3>
+    <h3 className="text-slate-500 capitalize heading text-3xl" id="about">Welcome to the Islamic center</h3>
     <h1 className="capitalize heading sm:text-6xl text-3xl sm:w-[50%] tracking-wide">In The Name Of Allah
     The Beneficent The Merciful</h1>
     
@@ -121,7 +121,7 @@ export default function Home() {
 </div>
 </div>
 
-<div className="gray-layer relative">
+<div className="gray-layer relative" id="services">
 
 <div className="bg-[url(https://nauthemes.com/demo/muezzin/wp-content/plugins/ingeniofy-plus/elementor-widgets/widgets_classes/../../assets/images/tq-bg1.jpg)] bg-cover  h-full w-full absolute bg-scroll top-0 left-0 z-[-2] bg-center"></div>
 <div className="flex flex-col gap-4 w-full items-center justify-center text-center p-20 z-50">

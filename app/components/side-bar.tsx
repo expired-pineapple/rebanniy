@@ -75,7 +75,7 @@ const SideBar:React.FC<Props> = ({openSidebar, handleClose}) => {
                       </div>
                       <div className="flex gap-4 items-center my-4 justify-center">
                       <a href="/register" className="border-[#DB9E30] border text-[#DB9E30] px-6 py-2 rounded-full text-md z-10 hover:bg-[#DB9E30]/[10%] active:bg-[#DB9E30]/[10%] cursor-pointer flex sm:hidden">
-                    Join Community
+                    Register
                   </a>
                   </div>
                     </div>
