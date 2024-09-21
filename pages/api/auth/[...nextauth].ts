@@ -46,7 +46,7 @@ export const authOptions: AuthOptions = {
         return user;
       }catch(error:any){
         console.log(error)
-        throw new Error("Something went wrong");
+        throw new Error(error);
       }
     }
     })

@@ -7,7 +7,8 @@ export async function PUT(request: NextRequest) {
         const query = request.nextUrl.searchParams;
         const token = query.get("token");
         const userId = query.get("userId");
-        console.log(query);
+        const body = await request.json();
+        console.log(body)
 
         // Find the confirmation token
         const confirmationToken = await db.confirmationToken.findUnique({
@@ -67,7 +68,8 @@ export async function PUT(request: NextRequest) {
                 userId: userId || ""
             },
             data: {
-                paymentStatus: "PENDING"
+                paymentStatus: "PENDING",
+                paymentReceipt: body?.paymentImage
             }
         });
 

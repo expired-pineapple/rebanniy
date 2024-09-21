@@ -75,15 +75,8 @@ export function DataTable<TData, TValue>({
     },
   });
 
-  // const demo = () =>{
-  //   toast({
-  //     variant: "destructive",
-  //     title: "Uh oh! Something went wrong.",
-  //     description: "There was a problem with your request.",
-  //   })
-  // }
   return (
-    <div className="w-full bg-white dark:bg-black p-4 rounded-md mt-4">
+    <div className="w-full bg-white dark:bg-black p-4 rounded-md">
       <Input
         placeholder="Search..."
         value={(table.getColumn(`${search}`)?.getFilterValue() as string) ?? ""}

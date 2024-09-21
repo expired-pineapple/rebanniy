@@ -16,7 +16,7 @@ import { signOut } from "next-auth/react";
 
 const SideBar = () => {
   const r  = usePathname();
-  const isStudent = r === "/dashbaord"
+  const isStudent = r === "/dashboard"
   const isAdmin = r === "/dashboard/admin"
 
 

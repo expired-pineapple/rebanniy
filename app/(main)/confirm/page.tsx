@@ -7,6 +7,7 @@ import { PiSpinner } from 'react-icons/pi';
 import { IoIosImages } from 'react-icons/io';
 import ImageUpload from '@/app/components/imageUpload';
 import { Button } from '@/components/ui/button';
+import axios from 'axios';
 
 export default function Register() {
     const [loading, setLoading] = useState(false)
@@ -28,21 +29,13 @@ export default function Register() {
                 throw new Error("Missing token or userId");
             }
 
-            const res = await fetch(`/api/confirmation?token=${token}&userId=${userId}`, {
-                method: "PUT",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ paymentImage })
-            });
+            const res = await axios.put(`/api/confirmation?token=${token}&userId=${userId}`, {paymentImage:paymentImage});
 
-            if (res.ok) {
-                const data = await res.json();
-                console.log("Registration successful:", data);
+            if (res.status == 200) {
                 setStep(2);
             } else {
-                const errorData = await res.json();
-                setError(errorData.error || "Registration failed. Please try again.");
+                const errorData = res.data;
+                setError(errorData.message || "Registration failed. Please try again.");
                 setTimeout(() => {
                     setError(null);
                   }, 5000);

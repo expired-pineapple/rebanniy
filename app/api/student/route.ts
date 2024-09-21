@@ -21,9 +21,6 @@ export async function GET(request: NextRequest) {
             fullName:`${student.User.firstName} ${student.User.lastName}`,
             username: student.User.username
         }))
-
-        console.log(mappedStudents)
-
         return NextResponse.json(mappedStudents);
     }catch(error){
         return NextResponse.json({error: "Something went wrong"}, {status: 500});
