@@ -102,6 +102,9 @@ export async function POST(request: NextRequest) {
         <p>At Rebanniy, we are committed to nurturing your child's Islamic education and character in a warm, supportive environment. We look forward to partnering with you in this blessed journey.</p>
         <p>Please confirm your payment using this <a  target="_blank" href="${baseURl}/confirm?token=${token.token}&user=${user.id}">Link</a></p>
         <p>If you have any questions, please don't hesitate to contact us at supports@rebanniy.com.</p>
+        <p>3000 for three months--- Women's Package</p>
+        <p>1500 for 3 months--- Children's Package</p>
+
         
         <p>May Allah bless your family and guide us all on the straight path.</p>
         
