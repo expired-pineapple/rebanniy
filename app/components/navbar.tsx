@@ -65,7 +65,7 @@ const Navbar = () => {
               <div className="flex gap-10">
                 <div className="flex gap-2 text-lg text-white items-center">
                   <IoMdPhonePortrait />
-                  <span className="font-semibold">Call Us: +(251) 9123 556 11</span>
+                  <span className="font-semibold">Call Us: +(251) 970 44 9079</span>
                 </div>
                 <div  className="flex gap-2 text-lg text-white items-center">
                   <PiMapPinLineLight />

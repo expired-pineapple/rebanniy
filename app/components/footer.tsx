@@ -28,8 +28,8 @@ return(
           <ul className="space-y-4">
             <li className="flex items-start">
               <div>
-                <span className="block">Phone number: <a href="tel:+251 970 44 9079" className="hover:underline">+251 970 44 9079</a></span>
-                <span className="block">Phone number: <a href="tel:+251 970 44 8879" className="hover:underline">+251 970 44 8879</a></span>
+                <span className="block"><a href="tel:+251 970 44 9079" className="hover:underline">+251 970 44 9079</a></span>
+                <span className="block"><a href="tel:+251 970 44 8879" className="hover:underline">+251 970 44 8879</a></span>
               </div>
             </li>
             <li className="flex items-center">
@@ -43,7 +43,7 @@ return(
         <div className="w-full">
           <h4 className="text-xl font-semibold mb-4 heading">Quick Links</h4>
           <ul className="space-y-2">
-            <li><a href="#" className="hover:underline">Home</a></li>
+            <li><a href="#" className="hover:underline">Home – Islamic Center</a></li>
             <li><a href="#services" className="hover:underline">Services</a></li>
             <li><a href="#about" className="hover:underline">About</a></li>
             <li><a href="#contact" className="hover:underline">Contact</a></li>
