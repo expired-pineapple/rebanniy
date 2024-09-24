@@ -18,10 +18,8 @@ import { MoreHorizontal } from "lucide-react"
 
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu"
@@ -53,6 +51,7 @@ import { BsCheck2Circle } from "react-icons/bs";
 import { MdErrorOutline } from "react-icons/md";
 
 import { useToast } from "@/hooks/use-toast";
+import AdminEditForm from "@/app/components/adminEditForm";
 
 
 
@@ -341,7 +340,7 @@ const deleteEmployee = async () => {
              onClick={() => {
               fetchEmployeeDataByID(employee.id)
               setEditEmployeeId(employee.id); setSheetOpen(true)} }
-            >Edit admin</DropdownMenuItem>
+            >Edit Admin</DropdownMenuItem>
             <DropdownMenuItem onClick={()=>{
                 setResetDialogOpen(true)
                 setResetEmployeeId(employee.id)}}>
@@ -416,29 +415,12 @@ const deleteEmployee = async () => {
                   <form onSubmit={saveUserData}>
                     <div className="grid gap-4 py-4">
                       <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
-                          Username
-                        </Label>
-                        <Input
-                          id="username"
-                          placeholder="EN001"
-                          className="col-span-3"
-                          value={formData.username}
-                          onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              username: e.target.value.trim(),
-                            })
-                          }
-                        />
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
+                        <Label htmlFor="name" className="">
                           First Name
                         </Label>
                         <Input
                           id="name"
-                          placeholder="John Doe"
+                          placeholder="John"
                           className="col-span-3"
                           value={formData.firstName}
                           onChange={(e) =>
@@ -447,12 +429,12 @@ const deleteEmployee = async () => {
                         />
                       </div>
                       <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
+                        <Label htmlFor="name" className="">
                           Last Name
                         </Label>
                         <Input
                           id="name"
-                          placeholder="John Doe"
+                          placeholder="John"
                           className="col-span-3"
                           value={formData.lastName}
                           onChange={(e) =>
@@ -462,7 +444,7 @@ const deleteEmployee = async () => {
                       </div>
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4 my-4">
-<Label htmlFor="formula" className="text-right">
+<Label htmlFor="formula" className="">
 Username
 </Label>
 <div className="relative col-span-3">
@@ -588,6 +570,7 @@ Password
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog> 
+          <AdminEditForm sheetOpen={sheetOpen} id={editEmployeeId} onChange={() => setSheetOpen(!sheetOpen)} onSuccess={fetchEmployeeData} />
         </main>
       </div>
     </div>

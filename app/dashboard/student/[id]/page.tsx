@@ -136,7 +136,7 @@ export default function StudentDetail() {
             <CardContent>
             <div className="flex gap-10">
               {
-               ( data?.image !== "" || !loading) ? (
+               ( data?.image !== "" && !loading) ? (
                 <Image src={data?.image || ""} width={100} height={100} alt="sideImage"/>
                ) : (
                 <div className="text-9xl from-neutral-800">
@@ -191,7 +191,7 @@ export default function StudentDetail() {
             <div className="flex gap-10" key={index}>
               
               {
-               ( (guardian.image !== "" || !loading)) ? (
+               ( (guardian.image !== "" && !loading)) ? (
                 <Image src={guardian.image ||""} width={100} height={100} alt="sideImage"/>
                ) : (
                 <div className="text-9xl from-neutral-800">
